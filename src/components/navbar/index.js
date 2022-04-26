@@ -1,15 +1,17 @@
-import { Nav, StyledNavLink } from "./styles";
+import { Nav, TopRight, StyledNavLink } from "./styles";
+import Search from "../search";
 
 const Navbar = () => {
     return <>
         <Nav>
             <StyledNavLink to="/">Home</StyledNavLink>
-            <div>
+            <TopRight>
+                <Search />
                 <StyledNavLink to="/login">Login</StyledNavLink>
                 <StyledNavLink to="/signup">Signup</StyledNavLink>
-            </div>
+            </TopRight>
         </Nav>
-        <div style={{ height: "48.499998px" }}></div>
+        <div style={{ height: "48.45px" }}></div>
     </>
 };
 

@@ -6,17 +6,21 @@ export const Nav = styled.nav`
     position: fixed;
     width: 100%;
     box-sizing: border-box;
-    padding: 15px;
-    border-bottom: 1px solid gray;
+    padding: 6px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+`;
+
+export const TopRight = styled.div`
+    display: flex;
     align-items: center;
 `;
 
 export const StyledNavLink = styled(NavLink)`
     color: #95969b;
     text-decoration: none;
-    margin: 0 7px;
+    margin: 0 12px;
     &:hover {
         color: #0d259b
     }

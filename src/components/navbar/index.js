@@ -1,10 +1,13 @@
 import { Nav, TopRight, StyledNavLink } from "./styles";
+import { HomeIcon } from "../Icons";
 import Search from "../search";
 
 const Navbar = () => {
     return <>
         <Nav>
-            <StyledNavLink to="/">Home</StyledNavLink>
+            <StyledNavLink to="/">
+                <HomeIcon />
+            </StyledNavLink>
             <TopRight>
                 <Search />
                 <StyledNavLink to="/login">Login</StyledNavLink>

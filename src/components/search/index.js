@@ -1,13 +1,16 @@
-import { Wrap, SearchBar, Input, SearchButton } from "./styles";
+import { useState } from "react";
+import { SearchBar, Input, SearchButton } from "./styles";
 import { SearchIcon } from "../Icons";
 
 const Search = () => {
+    const [description, setDescription] = useState("");
+
     return (
         <SearchBar>
-            <SearchButton type="submit">
+            <SearchButton>
                 <SearchIcon />
             </SearchButton>
-            <Input type="text" placeholder="Search" />
+            <Input type="text" placeholder="Search" value={description} onChange={e => setDescription(e.target.value)} />
         </SearchBar>
     );
 };

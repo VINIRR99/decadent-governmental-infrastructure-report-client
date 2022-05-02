@@ -10,6 +10,12 @@ class ReportsApi {
             return data;
         } catch (error) {throw error}
     };
+    getSearchResults = async search => {
+        try {
+            const { data } = await this.reportsApi.get(`/reports/${search}`);
+            return data;
+        } catch (error) {throw error};
+    };
 };
 
 export default new ReportsApi();

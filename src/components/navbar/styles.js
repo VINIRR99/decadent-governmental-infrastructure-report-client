@@ -10,6 +10,7 @@ export const Nav = styled.nav`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 1.5rem;
 `;
 
 export const TopRight = styled.div`

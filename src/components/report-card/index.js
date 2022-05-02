@@ -1,24 +1,23 @@
-import { ReportCardStyled, ReportImage, Paragraph } from "./styles";
+import { ReportCardStyled, TopDiv, ReportImage, Paragraph } from "./styles";
 import Profile from "../profile";
 import Fixed from "../Fixed";
+import Comment from "../comment";
 
-const ReportCard = ({ report }) => {
+const ReportCard = ({ user, createdAt, description, fixed, image, comments }) => {
     return (
         <ReportCardStyled>
-            <div style={{display: "flex", justifyContent: "space-between"}}>
-                <Profile user={report.user} createdAt={report.createdAt} />
+            <TopDiv>
+                <Profile user={user} createdAt={createdAt} />
                 <div>
-                    {report.fixed ? <Fixed status="solved" /> : <Fixed status="unsolved" />}
+                    {fixed ? <Fixed status="solved" /> : <Fixed status="unsolved" />}
                 </div>
-            </div>
-            <Paragraph>{report.description}</Paragraph>
-            <ReportImage src={report.image} alt="report" />
+            </TopDiv>
+            <Paragraph>{description}</Paragraph>
+            <ReportImage src={image} alt="report" />
             <hr />
             <div>
                 <Paragraph>Comments:</Paragraph>
-                {report.comments.map(comment => (
-                    <div key={comment._id}></div>
-                ))}
+                {comments.map(comment => <Comment key={comment._id} { ...comment } />)}
             </div>
         </ReportCardStyled>
     );

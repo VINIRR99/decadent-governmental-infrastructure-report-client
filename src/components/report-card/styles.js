@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const TopDiv = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
 export const ReportCardStyled = styled.section`
     border-radius: 8px;
     box-shadow: 7px 7px 13px 13px rgba(50, 50, 50, 0.22);

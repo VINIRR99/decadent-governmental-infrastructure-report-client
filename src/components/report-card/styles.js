@@ -20,3 +20,18 @@ export const ReportImage = styled.img`
 export const Paragraph = styled.p`
     font-size: 1.5rem;
 `;
+
+export const ShowComments = styled.div`
+    display: flex;
+    justify-content: center;
+    button {
+        background-color: #88daca;
+        border: 0;
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 5px;
+        color: white;
+        font-weight: bold;
+        font-size: 1.5rem;
+    };
+`;

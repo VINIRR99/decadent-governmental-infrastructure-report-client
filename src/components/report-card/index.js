@@ -1,4 +1,4 @@
-import { ReportCardStyled, TopDiv, ReportImage, Paragraph } from "./styles";
+import { ReportCardStyled, TopDiv, ReportImage, Paragraph, ShowComments } from "./styles";
 import Profile from "../profile";
 import Fixed from "../Fixed";
 import Comment from "../comment";
@@ -14,11 +14,20 @@ const ReportCard = ({ user, createdAt, description, fixed, image, comments }) =>
             </TopDiv>
             <Paragraph>{description}</Paragraph>
             <ReportImage src={image} alt="report" />
-            <hr />
-            <div>
-                <Paragraph>Comments:</Paragraph>
-                {comments.map(comment => <Comment key={comment._id} { ...comment } />)}
-            </div>
+            {(comments.length !== 0) && (
+                <div>
+                    <hr />
+                    <div>
+                        <Paragraph>Comments:</Paragraph>
+                        {comments.slice(0, 3).map(comment => <Comment key={comment._id} { ...comment } />)}
+                    </div>
+                    {(comments.length > 3) && (
+                        <ShowComments>
+                            <button>View More Comments</button>
+                        </ShowComments>
+                    )}
+                </div>
+            )}
         </ReportCardStyled>
     );
 };

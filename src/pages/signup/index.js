@@ -63,48 +63,25 @@ const Signup = () => {
 
         if (username) {
             const verifyUsername = await reportsApi.getUserByUsername(username);
-            if (typeof(verifyUsername) === "string") {
-                if (verifyUsername.slice(32) === "404") {
-                    setUsedUsername(false);
-                    if (
-                        /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/.test(name) &&
-                        password &&
-                        passwordConfirmation &&
-                        password === passwordConfirmation
-                    ) {
-                        const newUser = await reportsApi.signup(name, username, password, passwordConfirmation);
-                        if (newUser) {
-                            console.log(newUser);
-                            setName("");
-                            setUsername("");
-                            setPassword("");
-                            setPasswordConfirmation("");
-                        };
-                    };
-                } else console.error(`Error on getUserByUsername => ${verifyUsername}`);
+            if (verifyUsername === 404) {
+                setUsedUsername(false);
+                if (
+                    /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/.test(name) &&
+                    password &&
+                    passwordConfirmation &&
+                    password === passwordConfirmation
+                ) {
+                    const newUser = await reportsApi.signup(name, username, password, passwordConfirmation);
+                    if (typeof(newUser) !== "string") {
+                        console.log(newUser);
+                        setName("");
+                        setUsername("");
+                        setPassword("");
+                        setPasswordConfirmation("");
+                    } else alert(newUser);
+                };
             } else setUsedUsername(true);
         };
-
-        /*
-        if (
-            /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/.test(name) &&
-            username &&
-            typeof(verifyUsername) === "string" &&
-            password &&
-            passwordConfirmation
-        ) {
-            const newUser = await reportsApi.signup(name, username, password, passwordConfirmation);
-            if (typeof(newUser) === "string") {
-                setUsedUsername((newUser.slice(32) === "409") ? true : false);
-            } else {
-                setUsedUsername(false);
-                console.log(newUser);
-                setName("");
-                setUsername("");
-                setPassword("");
-                setPasswordConfirmation("");
-            };
-        }; */
     };
     return (
         <div>

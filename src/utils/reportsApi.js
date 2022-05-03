@@ -25,13 +25,17 @@ class ReportsApi {
                 passwordConfirmation
             });
             return data;
-        } catch (error) {console.error(`Error on signup => ${error.message}`)};
+        } catch (error) {
+            const errorMessage = `Error on signup => ${error.message}`;
+            console.error(errorMessage);
+            return errorMessage;
+        };
     };
     getUserByUsername = async username => {
         try {
             const { data } = await this.reportsApi.get(`/user/${username}`);
             return data;
-        } catch (error) {return error.message};
+        } catch (error) {console.error(`Error on getUserByUsername => ${error.message}`)};
     };
 };
 

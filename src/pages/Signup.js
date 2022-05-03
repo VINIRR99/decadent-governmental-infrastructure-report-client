@@ -1,6 +1,6 @@
 import { useState } from "react";
-import reportsApi from "../../utils/reportsApi";
-import { Form, Title, Input, Button, ErrorMessage } from "./styles";
+import reportsApi from "../utils/reportsApi";
+import Form from "../components/form";
 
 const Signup = () => {
     const [name, setName] = useState("");
@@ -51,7 +51,7 @@ const Signup = () => {
         }
     ];
 
-    const onSubmit = async event => {
+    const handleSubmit = async event => {
         event.preventDefault();
 
         setMissingName(!name ? true : false);
@@ -83,23 +83,15 @@ const Signup = () => {
             } else setUsedUsername(true);
         };
     };
+
+    const errorMessages = [
+        { condition: invalidName, message: "*Name can only contain letters!" },
+        { condition: usedUsername, message: "*Username already used!" },
+        { condition: passwordVerify, message: "*Password verification must be equal to password!" }
+    ];
+
     return (
-        <div>
-            <Form onSubmit={onSubmit}>
-                <Title>Sign up</Title>
-                {inputs.map(input => <Input key={input.placeholder}
-                    type={input.type}
-                    placeholder={input.missing ? input.errorMessage : input.placeholder}
-                    placeholderColor={input.missing ? "red" : "gray"}
-                    value={input.value}
-                    onChange={e => input.onChange(e)}
-                />)}
-                {invalidName && <ErrorMessage>*Name can only contain letters!</ErrorMessage>}
-                {usedUsername && <ErrorMessage>*Username already used!</ErrorMessage>}
-                {passwordVerify && <ErrorMessage>*Password verification must be equal to password!</ErrorMessage>}
-                <Button>Sign Up</Button>
-            </Form>
-        </div>
+        <Form onSubmit={handleSubmit} title="Signup" inputs={inputs} errorMsgs={errorMessages} />
     );
 };
 

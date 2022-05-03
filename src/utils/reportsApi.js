@@ -16,6 +16,19 @@ class ReportsApi {
             return data;
         } catch (error) {throw error};
     };
+    signup = async (name, username, password, passwordConfirmation) => {
+        try {
+            const { data } = await this.reportsApi.post("/auth/signup", {
+                name,
+                username,
+                password,
+                passwordConfirmation
+            });
+            return data;
+        } catch (error) {
+            throw error;
+        };
+    };
 };
 
 export default new ReportsApi();

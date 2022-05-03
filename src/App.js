@@ -3,8 +3,8 @@ import Navbar from "./components/navbar";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/home";
 import SearchResults from "./pages/search-results";
-import Login from "./pages/login";
-import Signup from "./pages/signup";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 const App = () => {
   return <>

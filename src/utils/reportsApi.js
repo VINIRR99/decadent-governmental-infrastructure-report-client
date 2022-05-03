@@ -8,13 +8,40 @@ class ReportsApi {
         try {
             const { data } = await this.reportsApi.get("/reports");
             return data;
-        } catch (error) {throw error}
+        } catch (error) {console.error(`Error on getAllReports => ${error.message}`)};
     };
     getSearchResults = async search => {
         try {
             const { data } = await this.reportsApi.get(`/reports/${search}`);
             return data;
-        } catch (error) {throw error};
+        } catch (error) {console.error(`Error on getSearchResults => ${error.message}`)};
+    };
+    signup = async (name, username, password, passwordConfirmation) => {
+        try {
+            const { data } = await this.reportsApi.post("/auth/signup", {
+                name,
+                username,
+                password,
+                passwordConfirmation
+            });
+            return data;
+        } catch (error) {
+            const errorMessage = `Error on signup => ${error.message}`;
+            console.error(errorMessage);
+            return errorMessage;
+        };
+    };
+    getUserByUsername = async username => {
+        try {
+            const { data } = await this.reportsApi.get(`/user/${username}`);
+            return data;
+        } catch (error) {console.error(`Error on getUserByUsername => ${error.message}`)};
+    };
+    login = async (username, password) => {
+        try {
+            const { data } = await this.reportsApi.post("/auth/login", {username, password});
+            return data;
+        } catch (error) {console.error(`Error on login => ${error.message}`)};
     };
 };
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-    margin: 5% 35%;
+    margin: 5% 25%;
     display: flex;
     flex-direction: column;
     padding: 15px 0;
@@ -23,6 +23,18 @@ export const Input = styled.input`
     border-radius: 20px;
     padding: 10px 15px;
     border-color: #e1e8ee;
+    ::placeholder {
+        color: ${({ placeholderColor }) => placeholderColor};
+        opacity: 1;
+    }
+
+    :-ms-input-placeholder {
+        color: ${({ placeholderColor }) => placeholderColor};
+    }
+
+    ::-ms-input-placeholder {
+        color: ${({ placeholderColor }) => placeholderColor};
+    }
 `;
 
 export const Button = styled.button`
@@ -33,4 +45,10 @@ export const Button = styled.button`
     font-size: 1.5rem;
     color: white;
     background-color: #2d354c;
+`;
+
+export const ErrorMessage = styled.p`
+    margin: 0 20%;
+    color: red;
+    text-align: center;
 `;

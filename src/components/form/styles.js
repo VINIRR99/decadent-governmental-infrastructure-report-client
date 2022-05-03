@@ -46,3 +46,9 @@ export const Button = styled.button`
     color: white;
     background-color: #2d354c;
 `;
+
+export const ErrorMessage = styled.p`
+    margin: 0 20%;
+    color: red;
+    text-align: center;
+`;

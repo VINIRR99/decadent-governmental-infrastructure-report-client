@@ -1,6 +1,6 @@
-import { StyledForm, Title, Input, Button } from "./styles";
+import { StyledForm, Title, Input, Button, ErrorMessage } from "./styles";
 
-const Form = ({ onSubmit, title, inputs, children }) => {
+const Form = ({ onSubmit, title, inputs, errorMsgs }) => {
     return (
         <StyledForm onSubmit={onSubmit}>
             <Title>{title}</Title>
@@ -11,7 +11,7 @@ const Form = ({ onSubmit, title, inputs, children }) => {
                 value={input.value}
                 onChange={e => input.onChange(e)}
             />)}
-            {children}
+            {errorMsgs.map(error => error.condition && <ErrorMessage key={error.message}>{error.message}</ErrorMessage>)}
             <Button>{title}</Button>
         </StyledForm>
     );

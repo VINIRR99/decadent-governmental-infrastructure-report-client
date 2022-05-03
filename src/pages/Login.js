@@ -1,5 +1,6 @@
 import { useState } from "react";
-import Form from "../../components/form";
+import reportsApi from "../utils/reportsApi";
+import Form from "../components/form";
 
 const Login = () => {
     const [username, setUsername] = useState("");
@@ -7,6 +8,7 @@ const Login = () => {
 
     const [missingUsername, setMissingUsername] = useState(false);
     const [missingPassword, setMissingPassword] = useState(false);
+    const [wrongLogin, setWrongLogin] = useState(false);
 
     const inputs = [
         {
@@ -32,9 +34,24 @@ const Login = () => {
 
         setMissingUsername(!username ? true : false);
         setMissingPassword(!password ? true : false);
+
+        if (username && password) {
+            const user = await reportsApi.login(username, password);
+            if (!user) {
+                setWrongLogin(true);
+            } else {
+                setWrongLogin(false);
+                console.log(user);
+                setUsername("");
+                setPassword("");
+            };
+        };
     };
+
+    const errorMessages = [{ condition: wrongLogin, message: "*Wrong username or password!" }];
+    
     return (
-        <Form onSubmit={handleSubmit} title="Login" inputs={inputs}></Form>
+        <Form onSubmit={handleSubmit} title="Login" inputs={inputs} errorMsgs={errorMessages} />
     );
 };
 

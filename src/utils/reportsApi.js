@@ -37,6 +37,12 @@ class ReportsApi {
             return data;
         } catch (error) {console.error(`Error on getUserByUsername => ${error.message}`)};
     };
+    login = async (username, password) => {
+        try {
+            const { data } = await this.reportsApi.post("/auth/login", {username, password});
+            return data;
+        } catch (error) {console.error(`Error on login => ${error.message}`)};
+    };
 };
 
 export default new ReportsApi();

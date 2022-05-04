@@ -4,9 +4,9 @@ const Image = styled.img`
     width: ${({ size }) => `${size}px`};
     height: ${({ size }) => `${size}px`};
     border-radius: 50%;
-    margin: 0 10px 0 4px;
+    margin: ${({ margin }) => margin};
 `;
 
-const ProfileImage = ({ image, size }) => <Image src={image} size={size} alt="profile" />
+const ProfileImage = ({ image, size, margin }) => <Image src={image} size={size} margin={margin} alt="profile" />
 
 export default ProfileImage;

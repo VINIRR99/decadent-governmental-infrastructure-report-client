@@ -4,7 +4,7 @@ import ProfileImage from "../ProfileImage";
 const Comment = ({ user, comment, createdAt }) => {
     return (
         <StyledComment>
-            <ProfileImage image={user.profileImage} size={50} />
+            <ProfileImage image={user.profileImage} size={50} margin="0 10px 0 4px" />
             <RightDiv>
                 <CommentContent>
                     <StyledLink to={`/profile/${user.username}`}>

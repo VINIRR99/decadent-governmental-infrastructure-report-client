@@ -10,9 +10,15 @@ class ReportsApi {
             return data;
         } catch (error) {console.error(`Error on getAllReports => ${error.message}`)};
     };
+    getOneReport = async reportId => {
+        try {
+            const { data } = await this.reportsApi.get(`/reports/${reportId}`);
+            return data;
+        } catch (error) {console.error(`Error on getOneReport => ${error.message}`)};
+    };
     getSearchResults = async search => {
         try {
-            const { data } = await this.reportsApi.get(`/reports/${search}`);
+            const { data } = await this.reportsApi.get(`/reports/search/${search}`);
             return data;
         } catch (error) {console.error(`Error on getSearchResults => ${error.message}`)};
     };

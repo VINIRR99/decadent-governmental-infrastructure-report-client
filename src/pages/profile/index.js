@@ -87,7 +87,7 @@ const Profile = () => {
                                     </CommentContent>
                                 </ReportDescription>
                             </StyledLink>
-                        ) : <ReportCard key={data._id} user={data.user ? data.user : user} {...data} />
+                        ) : <ReportCard key={data._id} user={data.user ? data.user : user} limitComments={3} {...data} />
                     )}
                     {emptyMessage && <EmptyMessage>{emptyMessage}</EmptyMessage>}
                 </div>

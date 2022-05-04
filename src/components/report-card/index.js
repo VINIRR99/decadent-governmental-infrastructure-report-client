@@ -3,7 +3,7 @@ import ProfileCard from "../profile-card";
 import Fixed from "../Fixed";
 import Comment from "../comment";
 
-const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id }) => {
+const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id, limitComments }) => {
     return (
         <ReportCardStyled>
             <TopDiv>
@@ -19,9 +19,9 @@ const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id 
                     <hr />
                     <div>
                         <Paragraph>Comments:</Paragraph>
-                        {comments.slice(0, 3).map(comment => <Comment key={comment._id} { ...comment } />)}
+                        {comments.slice(0, limitComments).map(comment => <Comment key={comment._id} { ...comment } />)}
                     </div>
-                    {(comments.length > 3) && (
+                    {(limitComments && (comments.length > limitComments)) && (
                         <ShowComments>
                             <ShowCommentsButton to={`/report/${_id}`}>View More Comments</ShowCommentsButton>
                         </ShowComments>

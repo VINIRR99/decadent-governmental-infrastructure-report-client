@@ -10,7 +10,7 @@ const SearchResults = () => {
     useEffect(() => {(async () => setReports(await reportsApi.getSearchResults(searchResult)))()}, [searchResult]);
     return (
         <div style={{padding: "1.53965vw 15.39646vw 0"}}>
-            {reports.map(report => <ReportCard key={report._id} { ...report } />)}
+            {reports.map(report => <ReportCard key={report._id} limitComments={3} { ...report } />)}
         </div>
     );
 };

@@ -9,7 +9,7 @@ const Search = () => {
 
     const handleSearch = () => {
         if (description !== "") {
-            navigate(`/search?search-result=${description}`);
+            navigate(`/search/search?search-result=${description}`);
             setDescription("");
         };
     };

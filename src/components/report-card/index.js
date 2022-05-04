@@ -1,9 +1,9 @@
-import { ReportCardStyled, TopDiv, ReportImage, Paragraph, ShowComments } from "./styles";
+import { ReportCardStyled, TopDiv, ReportImage, Paragraph, ShowComments, ShowCommentsButton } from "./styles";
 import ProfileCard from "../profile-card";
 import Fixed from "../Fixed";
 import Comment from "../comment";
 
-const ReportCard = ({ user, createdAt, description, fixed, image, comments }) => {
+const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id }) => {
     return (
         <ReportCardStyled>
             <TopDiv>
@@ -23,7 +23,7 @@ const ReportCard = ({ user, createdAt, description, fixed, image, comments }) =>
                     </div>
                     {(comments.length > 3) && (
                         <ShowComments>
-                            <button>View More Comments</button>
+                            <ShowCommentsButton to={`/report/${_id}`}>View More Comments</ShowCommentsButton>
                         </ShowComments>
                     )}
                 </div>

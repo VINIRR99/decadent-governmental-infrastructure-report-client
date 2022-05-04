@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const MainDiv = styled.div`
     display: flex;
@@ -41,7 +42,14 @@ export const Button = styled.button`
     }
 `;
 
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: black;
+`;
+
 export const ReportDescription = styled.div`
+    text-decoration: none;
+    color: black;
     border-radius: 8px;
     box-shadow: 7px 7px 13px 13px rgba(50, 50, 50, 0.22);
     margin-bottom: 20px;

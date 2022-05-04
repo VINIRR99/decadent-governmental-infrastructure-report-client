@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const TopDiv = styled.div`
     display: flex;
@@ -24,14 +25,16 @@ export const Paragraph = styled.p`
 export const ShowComments = styled.div`
     display: flex;
     justify-content: center;
-    button {
-        background-color: #88daca;
-        border: 0;
-        cursor: pointer;
-        padding: 10px;
-        border-radius: 5px;
-        color: white;
-        font-weight: bold;
-        font-size: 1.5rem;
-    };
+`;
+
+export const ShowCommentsButton = styled(Link)`
+    text-decoration: none;
+    background-color: #88daca;
+    border: 0;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
 `;

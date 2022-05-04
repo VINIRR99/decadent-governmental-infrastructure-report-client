@@ -1,10 +1,10 @@
 import { StyledProfile, Name, Paragraph } from "./styles";
 import ProfileImage from "../ProfileImage";
 
-const Profile = ({ user, createdAt }) => {
+const ProfileCard = ({ user, createdAt }) => {
     return (
         <StyledProfile>
-            <ProfileImage image={user.profileImage} />
+            <ProfileImage image={user.profileImage} size={50} />
             <div>
                 <Name>{user.name}</Name>
                 <Paragraph>{user.username}</Paragraph>
@@ -14,4 +14,4 @@ const Profile = ({ user, createdAt }) => {
     );
 };
 
-export default Profile;
+export default ProfileCard;

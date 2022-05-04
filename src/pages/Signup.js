@@ -90,9 +90,7 @@ const Signup = () => {
         { condition: passwordVerify, message: "*Password verification must be equal to password!" }
     ];
 
-    return (
-        <Form onSubmit={handleSubmit} title="Signup" inputs={inputs} errorMsgs={errorMessages} />
-    );
+    return <Form onSubmit={handleSubmit} title="Signup" inputs={inputs} errorMsgs={errorMessages} />;
 };
 
 export default Signup;

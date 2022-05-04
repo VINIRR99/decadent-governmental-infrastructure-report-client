@@ -4,7 +4,7 @@ import ProfileImage from "../ProfileImage";
 const Comment = ({ user, comment, createdAt }) => {
     return (
         <StyledComment>
-            <ProfileImage image={user.profileImage} />
+            <ProfileImage image={user.profileImage} size={50} />
             <RightDiv>
                 <CommentContent>
                     <Name>{user.name}</Name>

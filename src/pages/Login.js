@@ -1,8 +1,11 @@
 import { useState } from "react";
 import reportsApi from "../utils/reportsApi";
+import { useNavigate } from "react-router-dom";
 import Form from "../components/form";
 
 const Login = () => {
+    const navigate = useNavigate();
+
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -41,9 +44,9 @@ const Login = () => {
                 setWrongLogin(true);
             } else {
                 setWrongLogin(false);
-                console.log(user);
                 setUsername("");
                 setPassword("");
+                navigate("/");
             };
         };
     };

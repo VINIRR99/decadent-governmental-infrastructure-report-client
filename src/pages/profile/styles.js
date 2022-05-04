@@ -40,3 +40,34 @@ export const Button = styled.button`
         background-color: #f0f2f4;
     }
 `;
+
+export const ReportDescription = styled.div`
+    border-radius: 8px;
+    box-shadow: 7px 7px 13px 13px rgba(50, 50, 50, 0.22);
+    margin-bottom: 20px;
+    padding: 10px;
+`;
+
+export const Description = styled.p`
+    margin-top: 1px;
+    font-size: 1.8rem;
+`;
+
+export const CommentContent = styled.div`
+    background-color: #dcdee5;
+    border-radius: 15px;
+    padding: 7px;
+`;
+
+export const Comment = styled.p`
+    margin-top: 1px;
+    font-size: 1.5rem;
+`;
+
+export const CreatedAt = styled.p`
+    margin: 0;
+`;
+
+export const EmptyMessage = styled.h1`
+    text-align: center;
+`;

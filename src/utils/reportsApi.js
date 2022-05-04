@@ -3,6 +3,19 @@ import axios from "axios";
 class ReportsApi {
     constructor () {
         this.reportsApi = axios.create({ baseURL: process.env.REACT_APP_REPORT_URL });
+        this.reportsApi.interceptors.request.use(config => {
+            const token = localStorage.getItem("token");
+            if (token) config.headers = { "Authorization": `Bearer ${token}` };
+            return config;
+        }, error => {console.error(error)});
+        this.reportsApi.interceptors.response.use(config => config, error => {
+            if (error.response.status === 401) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                window.location = "/";
+            };
+            throw error;
+        })
     };
     getAllReports = async () => {
         try {
@@ -30,6 +43,8 @@ class ReportsApi {
                 password,
                 passwordConfirmation
             });
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
             return data;
         } catch (error) {
             const errorMessage = `Error on signup => ${error.message}`;
@@ -46,7 +61,9 @@ class ReportsApi {
     login = async (username, password) => {
         try {
             const { data } = await this.reportsApi.post("/auth/login", {username, password});
-            return data;
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
+            return data.user;
         } catch (error) {console.error(`Error on login => ${error.message}`)};
     };
 };

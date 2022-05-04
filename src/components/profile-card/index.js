@@ -1,15 +1,15 @@
-import { StyledProfile, Name, Paragraph } from "./styles";
+import { StyledProfile, StyledLink, Name, Paragraph } from "./styles";
 import ProfileImage from "../ProfileImage";
 
 const ProfileCard = ({ user, createdAt }) => {
     return (
         <StyledProfile>
             <ProfileImage image={user.profileImage} size={50} />
-            <div>
+            <StyledLink to={`/profile/${user.username}`}>
                 <Name>{user.name}</Name>
                 <Paragraph>{user.username}</Paragraph>
                 <Paragraph>{createdAt}</Paragraph>
-            </div>
+            </StyledLink>
         </StyledProfile>
     );
 };

@@ -1,4 +1,4 @@
-import { StyledComment, RightDiv, CommentContent, Name, Username, CommentText, CreatedAt } from "./styles";
+import { StyledComment, RightDiv, CommentContent, StyledLink, Name, Username, CommentText, CreatedAt } from "./styles";
 import ProfileImage from "../ProfileImage";
 
 const Comment = ({ user, comment, createdAt }) => {
@@ -7,8 +7,10 @@ const Comment = ({ user, comment, createdAt }) => {
             <ProfileImage image={user.profileImage} size={50} />
             <RightDiv>
                 <CommentContent>
-                    <Name>{user.name}</Name>
-                    <Username>{user.username}</Username>
+                    <StyledLink to={`/profile/${user.username}`}>
+                        <Name>{user.name}</Name>
+                        <Username>{user.username}</Username>
+                    </StyledLink>
                     <CommentText>{comment}</CommentText>
                 </CommentContent>
                 <CreatedAt>{createdAt}</CreatedAt>

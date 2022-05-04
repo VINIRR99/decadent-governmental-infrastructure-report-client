@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledComment = styled.div`
     display: flex;
@@ -14,6 +15,10 @@ export const CommentContent = styled.div`
     background-color: #dcdee5;
     border-radius: 15px;
     padding: 7px;
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
 `;
 
 const Paragraph = styled.p`

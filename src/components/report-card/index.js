@@ -1,5 +1,5 @@
 import { ReportCardStyled, TopDiv, ReportImage, Paragraph, ShowComments } from "./styles";
-import Profile from "../profile";
+import ProfileCard from "../profile-card";
 import Fixed from "../Fixed";
 import Comment from "../comment";
 
@@ -7,7 +7,7 @@ const ReportCard = ({ user, createdAt, description, fixed, image, comments }) =>
     return (
         <ReportCardStyled>
             <TopDiv>
-                <Profile user={user} createdAt={createdAt} />
+                <ProfileCard user={user} createdAt={createdAt} />
                 <div>
                     {fixed ? <Fixed status="solved" /> : <Fixed status="unsolved" />}
                 </div>

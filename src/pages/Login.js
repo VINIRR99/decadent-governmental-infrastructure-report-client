@@ -50,9 +50,7 @@ const Login = () => {
 
     const errorMessages = [{ condition: wrongLogin, message: "*Wrong username or password!" }];
     
-    return (
-        <Form onSubmit={handleSubmit} title="Login" inputs={inputs} errorMsgs={errorMessages} />
-    );
+    return <Form onSubmit={handleSubmit} title="Login" inputs={inputs} errorMsgs={errorMessages} />;
 };
 
 export default Login;

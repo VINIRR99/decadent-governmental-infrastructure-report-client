@@ -18,7 +18,7 @@ class ReportsApi {
     };
     getSearchResults = async search => {
         try {
-            const { data } = await this.reportsApi.get(`/reports/${search}`);
+            const { data } = await this.reportsApi.get(`/reports/search/${search}`);
             return data;
         } catch (error) {console.error(`Error on getSearchResults => ${error.message}`)};
     };

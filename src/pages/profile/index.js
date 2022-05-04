@@ -4,6 +4,7 @@ import reportsApi from "../../utils/reportsApi";
 import { MainDiv, LeftDiv, UserInfo, RightDiv, Buttons, Button } from "./styles";
 import ProfileImage from "../../components/ProfileImage";
 import ReportCard from "../../components/report-card";
+import Comment from "../../components/comment";
 
 const Profile = () => {
     const { username } = useParams();
@@ -35,13 +36,16 @@ const Profile = () => {
                     <Button onClick={() => setDataToShow(user.reports)} condition={dataToShow === user.reports}>
                         Reports
                     </Button>
-                    <Button condition={dataToShow === user.comments}>
+                    <Button onClick={() => setDataToShow(user.comments)} condition={dataToShow === user.comments}>
                         Comments
                     </Button>
                 </Buttons>
                 <hr />
                 <div style={{padding: "1.5% 8% 0"}}>
-                    {dataToShow.map(data => <ReportCard key={data._id} user={data.user ? data.user : user} {...data} />)}
+                    {dataToShow.map(data => data.comment ?
+                        <Comment user={user} comment={data.comment} createdAt={data.createdAt} /> :
+                        <ReportCard key={data._id} user={data.user ? data.user : user} {...data} />
+                    )}
                 </div>
             </RightDiv>
         </MainDiv>

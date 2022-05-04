@@ -17,9 +17,10 @@ import {
     EmptyMessage
 } from "./styles";
 import ProfileImage from "../../components/ProfileImage";
+import AddReport from "../../components/add-report";
 import ReportCard from "../../components/report-card";
 
-const Profile = () => {
+const Profile = ({ loggedUser }) => {
     const { username } = useParams();
     const [user, setUser] = useState({});
     const [dataToShow, setDataToShow] = useState([]);
@@ -76,6 +77,7 @@ const Profile = () => {
                     <Button onClick={showComments} condition={dataToShow === user.comments}>Comments</Button>
                 </Buttons>
                 <hr />
+                {(loggedUser._id === user._id) && <AddReport user={loggedUser} />}
                 <div style={{padding: "1.5% 8% 0"}}>
                     {dataToShow.map(data => data.comment ? (
                             <StyledLink key={data._id} to={`/report/${data.report._id}`}>

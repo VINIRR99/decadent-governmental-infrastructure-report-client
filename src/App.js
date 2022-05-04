@@ -9,6 +9,8 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/profile";
 
 const App = () => {
+  const loggedUser = JSON.parse(localStorage.getItem("user"));
+
   return <>
     <Navbar />
     <Routes>
@@ -17,7 +19,7 @@ const App = () => {
       <Route path="/search/:search" element={ <SearchResults /> } />
       <Route path="/login" element={ <Login /> } />
       <Route path="/signup" element={ <Signup /> } />
-      <Route path="/profile/:username" element={ <Profile /> } />
+      <Route path="/profile/:username" element={ <Profile loggedUser={loggedUser} /> } />
     </Routes>
   </>
 };

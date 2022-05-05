@@ -2,7 +2,7 @@ import { useState } from "react";
 import reportsApi from "../../utils/reportsApi";
 import { MainDiv, Input, Textarea, Button, Form, SubmitButton } from "./styles";
 
-const AddReport = ({ userReports, setDataToShow }) => {
+const AddReport = ({ userReports, setUserReports }) => {
     const [showForm, setShowForm] = useState(false);
     const [imageURL, setImageURL] = useState("");
     const [location, setLocation] = useState("");
@@ -31,7 +31,7 @@ const AddReport = ({ userReports, setDataToShow }) => {
             const newReport = await reportsApi.postReport(reportInputs);
             const notFixedReports = [...userReports].filter(report => !report.fixed);
             const fixedReports = [...userReports].filter(report => report.fixed);
-            setDataToShow([...notFixedReports, newReport, ...fixedReports]);
+            setUserReports([...notFixedReports, newReport, ...fixedReports]);
 
             handleCancelButton();
         };

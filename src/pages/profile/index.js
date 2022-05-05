@@ -20,17 +20,19 @@ import ProfileImage from "../../components/ProfileImage";
 import AddReport from "../../components/add-report";
 import ReportCard from "../../components/report-card";
 
-const Profile = ({ loggedUser }) => {
+const Profile = ({ loggedUser, userIsLogged }) => {
     const { username } = useParams();
     const [user, setUser] = useState({});
     const [dataToShow, setDataToShow] = useState([]);
     const [emptyMessage, setEmptyMessage] = useState("");
 
+    const [showButton, setShowButton] = useState(false);
+
     useEffect(() => {(async () => {
         const fetchedUser = await reportsApi.getUserByUsername(username);
         setUser(await fetchedUser);
-        setDataToShow(await fetchedUser.readLater);
-        if (fetchedUser.reports.readLater === 0) {
+        setDataToShow(await fetchedUser.reports);
+        if (fetchedUser.reports.reports === 0) {
             setEmptyMessage(`${fetchedUser.username} does not have any reports added to this list.`);
         };
     })()}, [username]);
@@ -41,6 +43,7 @@ const Profile = ({ loggedUser }) => {
         if (user.readLater.length === 0) {
             setEmptyMessage(`${user.username} does not have any reports added to this list.`)
         };
+        if (userIsLogged) setShowButton(((loggedUser._id === user._id) && (dataToShow === user.readLater)) ? true : false);
     };
 
     const showReports = () => {
@@ -77,9 +80,7 @@ const Profile = ({ loggedUser }) => {
                     <Button onClick={showComments} condition={dataToShow === user.comments}>Comments</Button>
                 </Buttons>
                 <hr />
-                {(Object.keys(loggedUser).length > 0) && ((dataToShow === user.reports) && (loggedUser._id === user._id)) && (
-                    <AddReport userReports={dataToShow} setDataToShow={setDataToShow} />
-                )}
+                {showButton && <AddReport userReports={dataToShow} setDataToShow={setDataToShow} />}
                 <div style={{padding: "1.5% 8% 0"}}>
                     {dataToShow.map(data => data.comment ? (
                             <StyledLink key={data._id} to={`/report/${data.report._id}`}>

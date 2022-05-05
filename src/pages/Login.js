@@ -46,7 +46,7 @@ const Login = () => {
                 setWrongLogin(false);
                 setUsername("");
                 setPassword("");
-                navigate("/");
+                navigate(`/profile/${user.username}`);
             };
         };
     };

@@ -29,9 +29,9 @@ const Profile = ({ loggedUser }) => {
     useEffect(() => {(async () => {
         const fetchedUser = await reportsApi.getUserByUsername(username);
         setUser(await fetchedUser);
-        setDataToShow(await fetchedUser.reports);
-        if (fetchedUser.reports.length === 0) {
-            setEmptyMessage(`${fetchedUser.username} does not posted any report yet.`);
+        setDataToShow(await fetchedUser.readLater);
+        if (fetchedUser.reports.readLater === 0) {
+            setEmptyMessage(`${fetchedUser.username} does not have any reports added to this list.`);
         };
     })()}, [username]);
 
@@ -77,7 +77,9 @@ const Profile = ({ loggedUser }) => {
                     <Button onClick={showComments} condition={dataToShow === user.comments}>Comments</Button>
                 </Buttons>
                 <hr />
-                {(loggedUser._id === user._id) && <AddReport userReports={dataToShow} setDataToShow={setDataToShow} />}
+                {(Object.keys(loggedUser).length > 0) && ((dataToShow === user.reports) && (loggedUser._id === user._id)) && (
+                    <AddReport userReports={dataToShow} setDataToShow={setDataToShow} />
+                )}
                 <div style={{padding: "1.5% 8% 0"}}>
                     {dataToShow.map(data => data.comment ? (
                             <StyledLink key={data._id} to={`/report/${data.report._id}`}>

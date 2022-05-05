@@ -45,7 +45,7 @@ class ReportsApi {
             });
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
-            return data;
+            return data.user;
         } catch (error) {
             const errorMessage = `Error on signup => ${error.message}`;
             console.error(errorMessage);

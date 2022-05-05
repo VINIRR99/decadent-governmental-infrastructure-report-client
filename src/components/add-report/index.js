@@ -10,8 +10,6 @@ const AddReport = ({ userReports, setDataToShow }) => {
     const [missingImageURL, setMissingImageURL] = useState(false);
     const [missingLocation, setMissingLocation] = useState(false);
 
-    console.log(description);
-
     const handleCancelButton = () => {
         setShowForm(false);
         setImageURL("");

@@ -4,7 +4,7 @@ import { MainDiv, Input, Textarea, Button, Form, SubmitButton } from "./styles";
 
 const AddReport = ({ userReports, setUserReports }) => {
     const [showForm, setShowForm] = useState(false);
-    const [imageURL, setImageURL] = useState("");
+    const [imageFile, setImageFile] = useState();
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
     const [missingImageURL, setMissingImageURL] = useState(false);
@@ -12,7 +12,7 @@ const AddReport = ({ userReports, setUserReports }) => {
 
     const handleCancelButton = () => {
         setShowForm(false);
-        setImageURL("");
+        setImageFile();
         setLocation("");
         setDescription("");
         setMissingImageURL(false);
@@ -22,6 +22,7 @@ const AddReport = ({ userReports, setUserReports }) => {
     const handleSubmit = async event => {
         event.preventDefault();
 
+        /*
         setMissingImageURL(!imageURL ? true : false);
         setMissingLocation(!location ? true : false);
 
@@ -34,7 +35,7 @@ const AddReport = ({ userReports, setUserReports }) => {
             setUserReports([...notFixedReports, newReport, ...fixedReports]);
 
             handleCancelButton();
-        };
+        }; */
     };
 
     return (
@@ -42,13 +43,7 @@ const AddReport = ({ userReports, setUserReports }) => {
             {!showForm && <Button onClick={() => setShowForm(true)}>Add new report</Button>}
             {showForm && (
                 <Form onSubmit={handleSubmit}>
-                    <Input
-                        type="url"
-                        placeholder={missingImageURL ? "*Image URL is required!" : "Report image URL"}
-                        placeholderColor={missingImageURL ? "red" : "gray"}
-                        value={imageURL}
-                        onChange={e => setImageURL(e.target.value)}
-                    />
+                    <input type="file" onChange={e => setImageFile(e.target.files[0])} />
                     <Input
                         type="text"
                         placeholder={missingLocation ? "*Location is required!" : "Location"}
@@ -74,3 +69,13 @@ const AddReport = ({ userReports, setUserReports }) => {
 };
 
 export default AddReport;
+
+/*
+<Input
+    type="url"
+    placeholder={missingImageURL ? "*Image URL is required!" : "Report image URL"}
+    placeholderColor={missingImageURL ? "red" : "gray"}
+    value={imageURL}
+    onChange={e => setImageURL(e.target.value)}
+/>
+*/

@@ -77,7 +77,7 @@ const Profile = ({ loggedUser }) => {
                     <Button onClick={showComments} condition={dataToShow === user.comments}>Comments</Button>
                 </Buttons>
                 <hr />
-                {(loggedUser._id === user._id) && <AddReport user={loggedUser} />}
+                {(loggedUser._id === user._id) && <AddReport userReports={dataToShow} setDataToShow={setDataToShow} />}
                 <div style={{padding: "1.5% 8% 0"}}>
                     {dataToShow.map(data => data.comment ? (
                             <StyledLink key={data._id} to={`/report/${data.report._id}`}>

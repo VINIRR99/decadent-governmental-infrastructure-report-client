@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import "./App.css";
 import Navbar from "./components/navbar";
 import { Routes, Route } from "react-router-dom";
@@ -9,6 +10,13 @@ import Signup from "./pages/Signup";
 import Profile from "./pages/profile";
 
 const App = () => {
+  const [loggedUser, setLoggedUser] = useState({});
+
+  useEffect(() => {(async () => {
+    const user = await JSON.parse(localStorage.getItem("user"));
+    if (user) setLoggedUser(user);
+  })()}, [])
+
   return <>
     <Navbar />
     <Routes>
@@ -17,7 +25,7 @@ const App = () => {
       <Route path="/search/:search" element={ <SearchResults /> } />
       <Route path="/login" element={ <Login /> } />
       <Route path="/signup" element={ <Signup /> } />
-      <Route path="/profile/:username" element={ <Profile /> } />
+      <Route path="/profile/:username" element={ <Profile loggedUser={loggedUser} /> } />
     </Routes>
   </>
 };

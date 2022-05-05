@@ -45,7 +45,7 @@ class ReportsApi {
             });
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
-            return data;
+            return data.user;
         } catch (error) {
             const errorMessage = `Error on signup => ${error.message}`;
             console.error(errorMessage);
@@ -65,6 +65,12 @@ class ReportsApi {
             localStorage.setItem("user", JSON.stringify(data.user));
             return data.user;
         } catch (error) {console.error(`Error on login => ${error.message}`)};
+    };
+    postReport = async newReport => {
+        try {
+            const { data } = await this.reportsApi.post("/reports", newReport);
+            return data;
+        } catch (error) {console.error(`Error on postReport => ${error.message}`)};
     };
 };
 

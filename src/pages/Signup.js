@@ -1,8 +1,11 @@
 import { useState } from "react";
 import reportsApi from "../utils/reportsApi";
+import { useNavigate } from "react-router-dom";
 import Form from "../components/form";
 
 const Signup = () => {
+    const navigate = useNavigate();
+
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -73,11 +76,11 @@ const Signup = () => {
                 ) {
                     const newUser = await reportsApi.signup(name, username, password, passwordConfirmation);
                     if (typeof(newUser) !== "string") {
-                        console.log(newUser);
                         setName("");
                         setUsername("");
                         setPassword("");
                         setPasswordConfirmation("");
+                        navigate("/");
                     } else alert(newUser);
                 };
             } else setUsedUsername(true);

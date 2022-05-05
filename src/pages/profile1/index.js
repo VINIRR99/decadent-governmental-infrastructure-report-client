@@ -74,13 +74,13 @@ const Profile1 = () => {
                 </Buttons>
                 <hr />
                 {(loggedUser && (loggedUser._id === user._id) && showReports) && (
-                    <AddReport userReports={userReports} setDataToShow={setUserReports} />
+                    <AddReport userReports={userReports} setUserReports={setUserReports} />
                 )}
                 <div style={{padding: "1.5% 8% 0"}}>
                     {showReadingList && user.readLater.map(report => (
                         <ReportCard key={report._id} limitComments={3} {...report} />
                     ))}
-                    {showReports && user.reports.map(report => (
+                    {showReports && userReports.map(report => (
                         <ReportCard key={report._id} user={user} limitComments={3} {...report} />
                     ))}
                     {showComments && user.comments.map(comment => (

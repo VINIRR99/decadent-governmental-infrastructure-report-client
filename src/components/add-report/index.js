@@ -7,7 +7,7 @@ const AddReport = ({ userReports, setUserReports }) => {
     const [imageFile, setImageFile] = useState();
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
-    const [missingImageURL, setMissingImageURL] = useState(false);
+    //const [missingImageURL, setMissingImageURL] = useState(false);
     const [missingLocation, setMissingLocation] = useState(false);
 
     const handleCancelButton = () => {
@@ -15,18 +15,30 @@ const AddReport = ({ userReports, setUserReports }) => {
         setImageFile();
         setLocation("");
         setDescription("");
-        setMissingImageURL(false);
+        //setMissingImageURL(false);
         setMissingLocation(false);
     };
 
     const handleSubmit = async event => {
         event.preventDefault();
 
-        /*
-        setMissingImageURL(!imageURL ? true : false);
+        //setMissingImageURL(!imageURL ? true : false);
         setMissingLocation(!location ? true : false);
 
-        if (imageURL && location) {
+        if (imageFile && location) {
+            const reportInputs = { location };
+            if (description) reportInputs.description = description;
+            const { _id } = await reportsApi.postReport(reportInputs);
+            const newReport = await reportsApi.uploadReportImage(imageFile, _id);
+            const notFixedReports = [...userReports].filter(report => !report.fixed);
+            const fixedReports = [...userReports].filter(report => report.fixed);
+            setUserReports([...notFixedReports, newReport, ...fixedReports]);
+
+            handleCancelButton();
+        };
+
+        /*
+        if (imageFile && location) {
             const reportInputs = { location, image: imageURL };
             if (description) reportInputs.description = description;
             const newReport = await reportsApi.postReport(reportInputs);

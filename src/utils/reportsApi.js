@@ -77,7 +77,8 @@ class ReportsApi {
             const imgData = new FormData();
             imgData.append("image", file);
 
-            const { data } = await this.reportsApi.put(`/reports/upload-image/${reportId}`, imgData)
+            const { data } = await this.reportsApi.put(`/reports/upload-image/${reportId}`, imgData);
+            return data;
         } catch (error) {console.error(`Error on uploadImage => ${error.message}`)}
     };
 };

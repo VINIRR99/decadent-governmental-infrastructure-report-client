@@ -3,13 +3,13 @@ import ProfileCard from "../profile-card";
 import Fixed from "../Fixed";
 import Comment from "../comment";
 
-const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id, limitComments }) => {
+const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id, limitComments, loggedUser }) => {
     return (
         <ReportCardStyled>
             <TopDiv>
                 <ProfileCard user={user} createdAt={createdAt} />
                 <div>
-                    {fixed ? <Fixed status="solved" /> : <Fixed status="unsolved" />}
+                    {fixed ? <Fixed status="solved" loggedUser={loggedUser} reportUserId={user._id} /> : <Fixed status="unsolved" loggedUser={loggedUser} reportUserId={user._id} />}
                 </div>
             </TopDiv>
             <Paragraph>{description}</Paragraph>

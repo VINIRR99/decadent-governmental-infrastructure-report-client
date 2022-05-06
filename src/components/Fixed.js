@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { ThumbDownIcon, ThumbUpIcon } from "./Icons";
 
 const StyledFixed = styled.span`
+    cursor: ${({ cursor }) => cursor};
+    color: ${({ color }) => color};
     font-size: 1.5rem;
     text-align: center;
     > * {
@@ -9,7 +11,7 @@ const StyledFixed = styled.span`
     }
 `;
 
-const Fixed = ({ status }) => {
+const Fixed = ({ status, loggedUser, reportUserId }) => {
     let color = ""
     let message = "";
     let Icon;
@@ -29,9 +31,12 @@ const Fixed = ({ status }) => {
             color = "red";
             Icon = ThumbDownIcon;
     };
+
+    let cursor = "";
+    if (loggedUser && (loggedUser._id === reportUserId)) cursor = "pointer";
     
     return (
-        <StyledFixed style={{ color }}>
+        <StyledFixed color={color} cursor={cursor}>
             <Icon />
             {message}
         </StyledFixed>

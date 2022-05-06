@@ -20,46 +20,37 @@ import ProfileImage from "../../components/ProfileImage";
 import AddReport from "../../components/add-report";
 import ReportCard from "../../components/report-card";
 
-const Profile = ({ loggedUser, userIsLogged }) => {
+const Profile = ({ loggedUser }) => {
     const { username } = useParams();
     const [user, setUser] = useState({});
-    const [dataToShow, setDataToShow] = useState([]);
-    const [emptyMessage, setEmptyMessage] = useState("");
+    const [userReports, setUserReports] = useState([]);
 
-    const [showButton, setShowButton] = useState(false);
+    const [showReadingList, setShowReadingList] = useState(false);
+    const [showReports, setShowReports] = useState(true);
+    const [showComments, setShowComments] = useState(false);
 
     useEffect(() => {(async () => {
         const fetchedUser = await reportsApi.getUserByUsername(username);
         setUser(await fetchedUser);
-        setDataToShow(await fetchedUser.reports);
-        if (fetchedUser.reports.reports === 0) {
-            setEmptyMessage(`${fetchedUser.username} does not have any reports added to this list.`);
-        };
+        setUserReports(await fetchedUser.reports);
     })()}, [username]);
 
-    const showReadLater = () => {
-        setEmptyMessage("");
-        setDataToShow(user.readLater);
-        if (user.readLater.length === 0) {
-            setEmptyMessage(`${user.username} does not have any reports added to this list.`)
-        };
-        if (userIsLogged) setShowButton(((loggedUser._id === user._id) && (dataToShow === user.readLater)) ? true : false);
+    const seeReadingList = () => {
+        setShowReadingList(true);
+        setShowReports(false);
+        setShowComments(false);
     };
 
-    const showReports = () => {
-        setEmptyMessage("");
-        setDataToShow(user.reports);
-        if (user.reports.length === 0) {
-            setEmptyMessage(`${user.username} does not posted any report yet.`);
-        };
+    const seeReports = () => {
+        setShowReadingList(false);
+        setShowReports(true);
+        setShowComments(false);
     };
 
-    const showComments = () => {
-        setEmptyMessage("");
-        setDataToShow(user.comments);
-        if (user.comments.length === 0) {
-            setEmptyMessage(`${user.username} does not posted any comment yet.`);
-        };
+    const seeComments = () => {
+        setShowReadingList(false);
+        setShowReports(false);
+        setShowComments(true);
     };
 
     return (Object.keys(user).length > 0) && (
@@ -75,26 +66,41 @@ const Profile = ({ loggedUser, userIsLogged }) => {
             </LeftDiv>
             <RightDiv>
                 <Buttons>
-                    <Button onClick={showReadLater} condition={dataToShow === user.readLater}>Reading List</Button>
-                    <Button onClick={showReports} condition={dataToShow === user.reports}>Reports</Button>
-                    <Button onClick={showComments} condition={dataToShow === user.comments}>Comments</Button>
+                    <Button onClick={seeReadingList} condition={showReadingList}>Reading List</Button>
+                    <Button onClick={seeReports} condition={showReports}>Reports</Button>
+                    <Button onClick={seeComments} condition={showComments}>Comments</Button>
                 </Buttons>
                 <hr />
-                {showButton && <AddReport userReports={dataToShow} setDataToShow={setDataToShow} />}
+                {(loggedUser && (loggedUser._id === user._id) && showReports) && (
+                    <AddReport userReports={userReports} setUserReports={setUserReports} />
+                )}
                 <div style={{padding: "1.5% 8% 0"}}>
-                    {dataToShow.map(data => data.comment ? (
-                            <StyledLink key={data._id} to={`/report/${data.report._id}`}>
-                                <ReportDescription>
-                                    <Description>{data.report.description}</Description>
-                                    <CommentContent>
-                                        <Comment>{data.comment}</Comment>
-                                        <CreatedAt>{data.createdAt}</CreatedAt>
-                                    </CommentContent>
-                                </ReportDescription>
-                            </StyledLink>
-                        ) : <ReportCard key={data._id} user={data.user ? data.user : user} limitComments={3} {...data} />
+                    {showReadingList && user.readLater.map(report => (
+                        <ReportCard key={report._id} limitComments={3} {...report} />
+                    ))}
+                    {showReports && userReports.map(report => (
+                        <ReportCard key={report._id} user={user} limitComments={3} {...report} />
+                    ))}
+                    {showComments && user.comments.map(comment => (
+                        <StyledLink key={comment._id} to={`/report/${comment.report._id}`}>
+                            <ReportDescription>
+                                <Description>{comment.report.description}</Description>
+                                <CommentContent>
+                                    <Comment>{comment.comment}</Comment>
+                                    <CreatedAt>{comment.createdAt}</CreatedAt>
+                                </CommentContent>
+                            </ReportDescription>
+                        </StyledLink>
+                    ))}
+                    {(showReadingList && (user.readLater.length === 0)) && (
+                        <EmptyMessage>{user.username} does not have any reports added to this list.</EmptyMessage>
                     )}
-                    {emptyMessage && <EmptyMessage>{emptyMessage}</EmptyMessage>}
+                    {(showReports && (user.reports.length === 0)) && (
+                        <EmptyMessage>{user.username} does not posted any report yet.</EmptyMessage>
+                    )}
+                    {(showComments && (user.comments.length === 0)) && (
+                        <EmptyMessage>{user.username} does not posted any comment yet.</EmptyMessage>
+                    )}
                 </div>
             </RightDiv>
         </MainDiv>

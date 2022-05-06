@@ -31,9 +31,14 @@ const Comment = ({ loggedUser, user, comment: commentText, _id, createdAt, comme
                             </StyledLink>
                         </User>
                         {!editComment && <CommentText>{comment}</CommentText>}
-                        {editComment && <UpdateComment comment={comment} handleChange={e => setComment(e.target.value)} />}
+                        {editComment && <UpdateComment
+                            comment={comment}
+                            setComment={setComment}
+                            setEditComment={setEditComment}
+                            commentId={_id}
+                        />}
                     </div>
-                    {(loggedUser && (loggedUser._id === user._id)) && (
+                    {(!editComment && loggedUser && (loggedUser._id === user._id)) && (
                         <EditComment
                             commentId={_id}
                             comments={comments}

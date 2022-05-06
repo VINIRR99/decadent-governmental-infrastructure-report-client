@@ -2,7 +2,7 @@ import { useState } from "react";
 import reportsApi from "../../utils/reportsApi";
 import { Div, EditButton, EditList, Buttons } from "./styles";
 
-const EditiComment = ({ commentId, comments, setComments, setEmptyComments, setEditComment }) => {
+const EditComment = ({ commentId, comments, setComments, setEmptyComments, setEditComment }) => {
     const [showOptions, setShowOptions] = useState(false);
 
     const editComment = () => {
@@ -36,4 +36,4 @@ const EditiComment = ({ commentId, comments, setComments, setEmptyComments, setE
     );
 };
 
-export default EditiComment;
+export default EditComment;

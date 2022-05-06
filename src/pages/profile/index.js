@@ -1,25 +1,12 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import reportsApi from "../../utils/reportsApi";
-import {
-    MainDiv,
-    LeftDiv,
-    UserInfo,
-    RightDiv,
-    Buttons,
-    Button,
-    StyledLink,
-    ReportDescription,
-    Description,
-    CommentContent,
-    Comment,
-    CreatedAt,
-    EmptyMessage
-} from "./styles";
+import { MainDiv, LeftDiv, UserInfo, RightDiv, Buttons, Button, EmptyMessage } from "./styles";
 import ProfileImage from "../../components/ProfileImage";
 import AddReport from "../../components/add-report";
 import ReportCard from "../../components/report-card";
-import EditiComment from "../../components/edit-comment";
+import UserComment from "../../components/user-comment";
+import EditComment from "../../components/edit-comment";
 
 const Profile = ({ loggedUser }) => {
     const { username } = useParams();
@@ -104,23 +91,14 @@ const Profile = ({ loggedUser }) => {
                         />
                     ))}
                     {showComments && comments.map(comment => (
-                        <ReportDescription key={comment._id}>
-                            <Description>{comment.report.description}</Description>
-                            <CommentContent>
-                                <StyledLink to={`/report/${comment.report._id}`}>
-                                    <Comment>{comment.comment}</Comment>
-                                    <CreatedAt>{comment.createdAt}</CreatedAt>
-                                </StyledLink>
-                                {(loggedUser && (loggedUser._id === user._id)) && (
-                                    <EditiComment
-                                        commentId={comment._id}
-                                        comments={comments}
-                                        setComments={setComments}
-                                        setEmptyComments={setEmptyComments}
-                                    />
-                                )}
-                            </CommentContent>
-                        </ReportDescription>
+                        <UserComment
+                            loggedUser={loggedUser}
+                            user={user}
+                            comments={comments}
+                            setComments={setComments}
+                            setEmptyComments={setEmptyComments}
+                            {...comment}
+                        />
                     ))}
                     {(showReadingList && (user.readLater.length === 0)) && (
                         <EmptyMessage>{user.username} does not have any reports added to this list.</EmptyMessage>

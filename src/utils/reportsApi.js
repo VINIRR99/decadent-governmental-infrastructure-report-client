@@ -100,7 +100,7 @@ class ReportsApi {
             return data;
         } catch (error) {console.error(`Error on postComment => ${error.message}`, error.response.data)};
     };
-    updatedComment = async (commentId, comment) => {
+    updateComment = async (commentId, comment) => {
         try {
             const { data } = this.reportsApi.put(`/comment/${commentId}`, { comment });
             return data;

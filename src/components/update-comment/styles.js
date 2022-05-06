@@ -1,12 +1,9 @@
 import styled from "styled-components";
 
-export const Form = styled.form`
-`;
-
 export const Input = styled.input`
     width: 100%;
     border: 3px solid #00B4CC;
-    padding: 5px;
+    padding: 5px 0;
     height: 20px;
     border-radius: 17px;
     outline: none;
@@ -14,9 +11,6 @@ export const Input = styled.input`
     &:focus {
         color: black;
     }
-`;
-
-export const Buttons = styled.div`
 `;
 
 export const CancelButton = styled.button`

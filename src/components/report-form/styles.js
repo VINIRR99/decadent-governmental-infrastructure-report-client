@@ -4,7 +4,6 @@ export const MainDiv = styled.div`
     display: flex;
     justify-content: center;
     font-size: 1.5rem;
-    margin-bottom: ${({ marginBotton }) => marginBotton};
 `;
 
 export const File = styled.input`

@@ -1,7 +1,6 @@
 import { MainDiv, File, MissImg, Input, Textarea, Button, Form, SubmitButton } from "./styles";
 
 const AddReport = ({
-    marginBotton,
     functionality,
     showForm,
     setShowForm,
@@ -16,7 +15,7 @@ const AddReport = ({
     handleSubmit
 }) => {
     return (
-        <MainDiv marginBotton={marginBotton}>
+        <MainDiv>
             {!showForm && <Button onClick={() => setShowForm(true)}>{functionality}</Button>}
             {showForm && (
                 <Form onSubmit={handleSubmit}>

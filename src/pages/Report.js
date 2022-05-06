@@ -1,8 +1,20 @@
+import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import reportsApi from "../utils/reportsApi";
 import ReportForm from "../components/report-form";
+import DeleteReport from "../components/DeleteReport";
 import ReportCard from "../components/report-card";
+
+const Div = styled.div`
+    padding: 1.53965vw 15.39646vw 0;
+`;
+
+const Buttons = styled.div`
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+`;
 
 const Report = ({ loggedUser }) => {
     const { reportId } = useParams();
@@ -61,24 +73,26 @@ const Report = ({ loggedUser }) => {
     };
 
     return (Object.keys(report).length > 0) && (
-        <div style={{padding: "1.53965vw 15.39646vw 0"}}>
-            {(loggedUser && (loggedUser._id === report.user._id)) && (
-                <ReportForm 
-                    marginBotton="10px"
-                    functionality="Update report"
-                    showForm={showForm}
-                    setShowForm={setShowForm}
-                    setImageFile={setImageFile}
-                    location={locationForm}
-                    setLocation={setLocationForm}
-                    description={descriptionForm}
-                    setDescription={setDescriptionForm}
-                    handleCancelButton={handleCancelButton}
-                    missingImageFile={false}
-                    missingLocation={false}
-                    handleSubmit={handleSubmit}
-                />
-            )}
+        <Div>
+            <Buttons>
+                {(loggedUser && (loggedUser._id === report.user._id)) && (
+                    <ReportForm 
+                        functionality="Update report"
+                        showForm={showForm}
+                        setShowForm={setShowForm}
+                        setImageFile={setImageFile}
+                        location={locationForm}
+                        setLocation={setLocationForm}
+                        description={descriptionForm}
+                        setDescription={setDescriptionForm}
+                        handleCancelButton={handleCancelButton}
+                        missingImageFile={false}
+                        missingLocation={false}
+                        handleSubmit={handleSubmit}
+                    />
+                )}
+                {(loggedUser && (loggedUser._id === report.user._id)) && <DeleteReport />}
+            </Buttons>
             <ReportCard
                 key={report._id}
                 reportImage={imageURL}
@@ -86,7 +100,7 @@ const Report = ({ loggedUser }) => {
                 loggedUser={loggedUser}
                 { ...report }
             />
-        </div>
+        </Div>
     );
 };
 

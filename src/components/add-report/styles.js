@@ -6,6 +6,43 @@ export const MainDiv = styled.div`
     font-size: 1.5rem;
 `;
 
+export const File = styled.input`
+    color: transparent;
+    margin-bottom: 10px;
+    &::-webkit-file-upload-button {
+        visibility: hidden;
+    };
+    &:before {
+        content: "Select the image for the report";
+        color: black;
+        display: inline-block;
+        background: -webkit-linear-gradient(top, #f9f9f9, #e3e3e3);
+        border: 1px solid #999;
+        border-radius: 3px;
+        padding: 5px 8px;
+        outline: none;
+        white-space: nowrap;
+        cursor: pointer;
+        text-shadow: 1px 1px #fff;
+        font-weight: 700;
+        font-size: 10pt;
+    };
+    &:hover::before {
+        border-color: black;
+    };
+    &:active {
+        outline: 0;
+    };
+    &:active::before {
+        background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
+    };
+`;
+
+export const MissImg = styled.p`
+    margin: 0;
+    color: red;
+`;
+
 export const Input = styled.input`
     border-radius: 5px;
     padding: 5px;

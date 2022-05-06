@@ -1,13 +1,13 @@
 import { useState } from "react";
 import reportsApi from "../../utils/reportsApi";
-import { MainDiv, Input, Textarea, Button, Form, SubmitButton } from "./styles";
+import { MainDiv, File, MissImg, Input, Textarea, Button, Form, SubmitButton } from "./styles";
 
 const AddReport = ({ userReports, setUserReports }) => {
     const [showForm, setShowForm] = useState(false);
     const [imageFile, setImageFile] = useState();
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
-    //const [missingImageURL, setMissingImageURL] = useState(false);
+    const [missingImageFile, setMissingImageFile] = useState(false);
     const [missingLocation, setMissingLocation] = useState(false);
 
     const handleCancelButton = () => {
@@ -15,14 +15,14 @@ const AddReport = ({ userReports, setUserReports }) => {
         setImageFile();
         setLocation("");
         setDescription("");
-        //setMissingImageURL(false);
+        setMissingImageFile(false);
         setMissingLocation(false);
     };
 
     const handleSubmit = async event => {
         event.preventDefault();
 
-        //setMissingImageURL(!imageURL ? true : false);
+        setMissingImageFile(!imageFile ? true : false);
         setMissingLocation(!location ? true : false);
 
         if (imageFile && location) {
@@ -36,18 +36,6 @@ const AddReport = ({ userReports, setUserReports }) => {
 
             handleCancelButton();
         };
-
-        /*
-        if (imageFile && location) {
-            const reportInputs = { location, image: imageURL };
-            if (description) reportInputs.description = description;
-            const newReport = await reportsApi.postReport(reportInputs);
-            const notFixedReports = [...userReports].filter(report => !report.fixed);
-            const fixedReports = [...userReports].filter(report => report.fixed);
-            setUserReports([...notFixedReports, newReport, ...fixedReports]);
-
-            handleCancelButton();
-        }; */
     };
 
     return (
@@ -55,7 +43,8 @@ const AddReport = ({ userReports, setUserReports }) => {
             {!showForm && <Button onClick={() => setShowForm(true)}>Add new report</Button>}
             {showForm && (
                 <Form onSubmit={handleSubmit}>
-                    <input type="file" onChange={e => setImageFile(e.target.files[0])} />
+                    {missingImageFile && <MissImg>*Image is required!</MissImg>}
+                    <File type="file" onChange={e => setImageFile(e.target.files[0])} accept="image/*" />
                     <Input
                         type="text"
                         placeholder={missingLocation ? "*Location is required!" : "Location"}
@@ -81,13 +70,3 @@ const AddReport = ({ userReports, setUserReports }) => {
 };
 
 export default AddReport;
-
-/*
-<Input
-    type="url"
-    placeholder={missingImageURL ? "*Image URL is required!" : "Report image URL"}
-    placeholderColor={missingImageURL ? "red" : "gray"}
-    value={imageURL}
-    onChange={e => setImageURL(e.target.value)}
-/>
-*/

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { ReportCardStyled, TopDiv, LinkToReport, ReportImage, Paragraph, ShowComments, ShowCommentsButton } from "./styles";
 import ProfileCard from "../profile-card";
 import Fixed from "../Fixed";
@@ -10,11 +11,13 @@ const ReportCard = ({
     reportDescription,
     fixed,
     reportImage,
-    comments,
+    comments: reportComments,
     _id,
     limitComments,
     loggedUser
 }) => {
+    const [comments, setComments] = useState(reportComments);
+
     return (
         <ReportCardStyled>
             <TopDiv>
@@ -29,7 +32,7 @@ const ReportCard = ({
             </LinkToReport>
             {loggedUser && <>
                 <hr />
-                <PostComment user={loggedUser} />
+                <PostComment reportId={_id} user={loggedUser} comments={comments} setComments={setComments} />
             </>}
             {(comments.length !== 0) && (
                 <div>

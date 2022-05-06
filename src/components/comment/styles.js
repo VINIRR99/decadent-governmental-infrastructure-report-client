@@ -17,6 +17,10 @@ export const CommentContent = styled.div`
     padding: 7px;
 `;
 
+export const User = styled.div`
+    width: fit-content;
+`;
+
 export const StyledLink = styled(Link)`
     text-decoration: none;
 `;

@@ -1,6 +1,7 @@
 import { ReportCardStyled, TopDiv, LinkToReport, ReportImage, Paragraph, ShowComments, ShowCommentsButton } from "./styles";
 import ProfileCard from "../profile-card";
 import Fixed from "../Fixed";
+import PostComment from "../post-comment";
 import Comment from "../comment";
 
 const ReportCard = ({
@@ -26,9 +27,13 @@ const ReportCard = ({
                 <Paragraph>{reportDescription}</Paragraph>
                 <ReportImage src={reportImage} alt="report" />
             </LinkToReport>
+            {loggedUser && <>
+                <hr />
+                <PostComment user={loggedUser} />
+            </>}
             {(comments.length !== 0) && (
                 <div>
-                    <hr />
+                    {!loggedUser && <hr />}
                     <div>
                         <Paragraph>Comments:</Paragraph>
                         {comments.slice(0, limitComments).map(comment => <Comment key={comment._id} { ...comment } />)}

@@ -1,6 +1,6 @@
 import { MainDiv, File, MissImg, Input, Textarea, Button, Form, SubmitButton } from "./styles";
 
-const AddReport = ({
+const ReportForm = ({
     functionality,
     showForm,
     setShowForm,
@@ -45,4 +45,4 @@ const AddReport = ({
     );
 };
 
-export default AddReport;
+export default ReportForm;

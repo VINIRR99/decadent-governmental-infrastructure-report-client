@@ -90,7 +90,7 @@ const Report = ({ loggedUser }) => {
                         missingLocation={false}
                         handleSubmit={handleSubmit}
                     />
-                    <DeleteReport />
+                    <DeleteReport reportId={report._id} />
                 </Buttons>
             )}
             <ReportCard

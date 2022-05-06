@@ -65,6 +65,8 @@ export const CommentContent = styled.div`
     background-color: #dcdee5;
     border-radius: 15px;
     padding: 7px;
+    display: flex;
+    justify-content: space-between;
 `;
 
 export const Comment = styled.p`

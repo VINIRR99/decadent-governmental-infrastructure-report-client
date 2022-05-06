@@ -81,6 +81,7 @@ const Signup = () => {
                         setPassword("");
                         setPasswordConfirmation("");
                         navigate(`/profile/${newUser.username}`);
+                        window.location.reload();
                     } else alert(newUser);
                 };
             } else setUsedUsername(true);

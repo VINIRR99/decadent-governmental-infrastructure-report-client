@@ -2,7 +2,7 @@ import { useState } from "react";
 import reportsApi from "../../utils/reportsApi";
 import { Div, EditButton, EditList, Buttons } from "./styles";
 
-const EditiComment = ({ commentId, comments, setComments }) => {
+const EditiComment = ({ commentId, comments, setComments, setEmptyComments }) => {
     const [showOptions, setShowOptions] = useState(false);
 
     const editComment = () => {
@@ -14,10 +14,10 @@ const EditiComment = ({ commentId, comments, setComments }) => {
         const deleteComment = window.confirm("Are you sure you want to delete this comment?");
         if (deleteComment) {
             const removedDeleted = [...comments].filter(comment => comment._id !== commentId);
-            setComments(removedDeleted);
+            if (setEmptyComments && (removedDeleted.length === 0)) setEmptyComments(true);
+            setComments([...removedDeleted]);
             await reportsApi.deleteComment(commentId);
         };
-
     };
 
     return (

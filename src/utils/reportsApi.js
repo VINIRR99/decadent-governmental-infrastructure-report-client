@@ -46,7 +46,13 @@ class ReportsApi {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
             return data.user;
-        } catch (error) {console.error(`Error on signup => ${error.message}`, error.response.data)};
+        } catch (error) {
+            console.error(`Error on signup => ${error.message}`, error.response.data);
+            return `Error on signup => 
+            status: ${error.status}
+            message: ${error.response.data.message}
+            error: ${error.response.data.error}`;
+        };
     };
     getUserByUsername = async username => {
         try {

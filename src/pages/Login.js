@@ -47,6 +47,7 @@ const Login = () => {
                 setUsername("");
                 setPassword("");
                 navigate(`/profile/${user.username}`);
+                window.location.reload();
             };
         };
     };

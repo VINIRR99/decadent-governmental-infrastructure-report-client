@@ -19,20 +19,27 @@ import {
 import ProfileImage from "../../components/ProfileImage";
 import AddReport from "../../components/add-report";
 import ReportCard from "../../components/report-card";
+import EditiComment from "../../components/edit-comment";
 
 const Profile = ({ loggedUser }) => {
     const { username } = useParams();
     const [user, setUser] = useState({});
     const [userReports, setUserReports] = useState([]);
+    const [comments, setComments] = useState([]);
 
     const [showReadingList, setShowReadingList] = useState(false);
     const [showReports, setShowReports] = useState(true);
     const [showComments, setShowComments] = useState(false);
 
+    const [emptyComments, setEmptyComments] = useState(true);
+
     useEffect(() => {(async () => {
         const fetchedUser = await reportsApi.getUserByUsername(username);
         setUser(await fetchedUser);
         setUserReports(await fetchedUser.reports);
+        setComments(await fetchedUser.comments);
+
+        if (fetchedUser.comments.length !== 0) setEmptyComments(false);
     })()}, [username]);
 
     const seeReadingList = () => {
@@ -96,16 +103,24 @@ const Profile = ({ loggedUser }) => {
                             {...report}
                         />
                     ))}
-                    {showComments && user.comments.map(comment => (
-                        <StyledLink key={comment._id} to={`/report/${comment.report._id}`}>
-                            <ReportDescription>
-                                <Description>{comment.report.description}</Description>
-                                <CommentContent>
+                    {showComments && comments.map(comment => (
+                        <ReportDescription key={comment._id}>
+                            <Description>{comment.report.description}</Description>
+                            <CommentContent>
+                                <StyledLink to={`/report/${comment.report._id}`}>
                                     <Comment>{comment.comment}</Comment>
                                     <CreatedAt>{comment.createdAt}</CreatedAt>
-                                </CommentContent>
-                            </ReportDescription>
-                        </StyledLink>
+                                </StyledLink>
+                                {(loggedUser && (loggedUser._id === user._id)) && (
+                                    <EditiComment
+                                        commentId={comment._id}
+                                        comments={comments}
+                                        setComments={setComments}
+                                        setEmptyComments={setEmptyComments}
+                                    />
+                                )}
+                            </CommentContent>
+                        </ReportDescription>
                     ))}
                     {(showReadingList && (user.readLater.length === 0)) && (
                         <EmptyMessage>{user.username} does not have any reports added to this list.</EmptyMessage>
@@ -113,7 +128,7 @@ const Profile = ({ loggedUser }) => {
                     {(showReports && (user.reports.length === 0)) && (
                         <EmptyMessage>{user.username} does not posted any report yet.</EmptyMessage>
                     )}
-                    {(showComments && (user.comments.length === 0)) && (
+                    {(showComments && emptyComments) && (
                         <EmptyMessage>{user.username} does not posted any comment yet.</EmptyMessage>
                     )}
                 </div>

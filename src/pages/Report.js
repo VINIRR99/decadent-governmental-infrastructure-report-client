@@ -16,7 +16,7 @@ const Buttons = styled.div`
     margin-bottom: 10px;
 `;
 
-const Report = ({ loggedUser }) => {
+const Report = ({ loggedUser, setLoggedUser }) => {
     const { reportId } = useParams();
     const [report, setReport] = useState({});
     const [imageURL, setImageURL] = useState("https://res.cloudinary.com/dulbuc924/image/upload/v1651761945/reports/lyp8kvhuymamdlrorgsg.jpg");
@@ -98,6 +98,7 @@ const Report = ({ loggedUser }) => {
                 reportImage={imageURL}
                 reportDescription={description}
                 loggedUser={loggedUser}
+                setLoggedUser={setLoggedUser}
                 { ...report }
             />
         </Div>

@@ -14,6 +14,7 @@ import Fixed from "../Fixed";
 import PostComment from "../post-comment";
 import Comment from "../comment";
 import { RemoveIcon, AddIcon } from "../Icons";
+import reportsApi from "../../utils/reportsApi";
 
 const ReportCard = ({
     user,
@@ -24,9 +25,27 @@ const ReportCard = ({
     comments: reportComments,
     _id,
     limitComments,
-    loggedUser
+    loggedUser,
+    setLoggedUser,
+    getUser
 }) => {
     const [comments, setComments] = useState(reportComments);
+
+    const removeReport = async () => {
+        const updatedUser = await reportsApi.updateUser({ readLater: `-${_id}` });
+        setLoggedUser(await updatedUser);
+        localStorage.removeItem("user");
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        
+        if (getUser) getUser();
+    };
+
+    const addReport = async () => {
+        const updatedUser = await reportsApi.updateUser({ readLater: `+${_id}` });
+        setLoggedUser(await updatedUser);
+        localStorage.removeItem("user");
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+    };
 
     return (
         <ReportCardStyled>
@@ -35,10 +54,10 @@ const ReportCard = ({
                 <div>
                     <Fixed fixedReport={fixed} loggedUser={loggedUser} reportUserId={user._id} reportId={_id} />
                     {(loggedUser && (loggedUser._id !== user._id) && (loggedUser.readLater.includes(_id))) &&
-                        <ReadLaterButton><RemoveIcon /></ReadLaterButton>
+                        <ReadLaterButton onClick={removeReport}><RemoveIcon /></ReadLaterButton>
                     }
                     {(loggedUser && (loggedUser._id !== user._id) && (!loggedUser.readLater.includes(_id))) &&
-                        <ReadLaterButton><AddIcon /></ReadLaterButton>
+                        <ReadLaterButton onClick={addReport}><AddIcon /></ReadLaterButton>
                     }
                 </div>
             </TopDiv>

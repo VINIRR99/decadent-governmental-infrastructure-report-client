@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import reportsApi from "../../utils/reportsApi";
 import ReportCard from "../../components/report-card";
 
-const Home = ({ loggedUser }) => {
+const Home = ({ loggedUser, setLoggedUser }) => {
     const [reports, setReports] = useState([]);
     useEffect(() => {(async () => setReports(await reportsApi.getAllReports()))()}, []);
     return (
@@ -14,6 +14,7 @@ const Home = ({ loggedUser }) => {
                     reportDescription={report.description}
                     reportImage={report.image}
                     loggedUser={loggedUser}
+                    setLoggedUser={setLoggedUser}
                     { ...report }
                 />
             ))}

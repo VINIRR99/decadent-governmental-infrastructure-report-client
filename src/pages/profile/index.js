@@ -7,7 +7,7 @@ import AddReport from "../../components/add-report";
 import ReportCard from "../../components/report-card";
 import UserComment from "../../components/user-comment";
 
-const Profile = ({ loggedUser }) => {
+const Profile = ({ loggedUser, setLoggedUser }) => {
     const { username } = useParams();
     const [user, setUser] = useState({});
     const [userReports, setUserReports] = useState([]);
@@ -19,14 +19,16 @@ const Profile = ({ loggedUser }) => {
 
     const [emptyComments, setEmptyComments] = useState(true);
 
-    useEffect(() => {(async () => {
+    const getUser = async () => {
         const fetchedUser = await reportsApi.getUserByUsername(username);
         setUser(await fetchedUser);
         setUserReports(await fetchedUser.reports);
         setComments(await fetchedUser.comments);
 
         if (fetchedUser.comments.length !== 0) setEmptyComments(false);
-    })()}, [username]);
+    };
+
+    useEffect(() => {getUser()}, [username]);
 
     const seeReadingList = () => {
         setShowReadingList(true);
@@ -75,6 +77,8 @@ const Profile = ({ loggedUser }) => {
                             reportDescription={report.description}
                             reportImage={report.image}
                             loggedUser={loggedUser}
+                            setLoggedUser={setLoggedUser}
+                            getUser={getUser}
                             {...report}
                         />
                     ))}
@@ -86,6 +90,7 @@ const Profile = ({ loggedUser }) => {
                             reportDescription={report.description}
                             reportImage={report.image}
                             loggedUser={loggedUser}
+                            setLoggedUser={setLoggedUser}
                             {...report}
                         />
                     ))}

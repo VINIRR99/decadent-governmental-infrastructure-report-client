@@ -17,12 +17,12 @@ const App = () => {
   return <>
     <Navbar loggedUser={loggedUser} />
     <Routes>
-      <Route path="/" element={ <Home loggedUser={loggedUser} /> } />
-      <Route path="/report/:reportId" element={ <Report loggedUser={loggedUser} /> } />
-      <Route path="/search/:search" element={ <SearchResults /> } />
+      <Route path="/" element={ <Home loggedUser={loggedUser} setLoggedUser={setLoggedUser} /> } />
+      <Route path="/report/:reportId" element={ <Report loggedUser={loggedUser} setLoggedUser={setLoggedUser} /> } />
+      <Route path="/search/:search" element={ <SearchResults loggedUser={loggedUser} setLoggedUser={setLoggedUser} /> } />
       <Route path="/login" element={ <Login /> } />
       <Route path="/signup" element={ <Signup /> } />
-      <Route path="/profile/:username" element={ <Profile loggedUser={loggedUser} /> } />
+      <Route path="/profile/:username" element={ <Profile loggedUser={loggedUser} setLoggedUser={setLoggedUser} /> } />
     </Routes>
   </>
 };

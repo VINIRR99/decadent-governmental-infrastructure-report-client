@@ -1,10 +1,19 @@
 import { ReportCardStyled, TopDiv, LinkToReport, ReportImage, Paragraph, ShowComments, ShowCommentsButton } from "./styles";
 import ProfileCard from "../profile-card";
 import Fixed from "../Fixed";
-import { Link } from "react-router-dom";
 import Comment from "../comment";
 
-const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id, limitComments, loggedUser }) => {
+const ReportCard = ({
+    user,
+    createdAt,
+    reportDescription,
+    fixed,
+    reportImage,
+    comments,
+    _id,
+    limitComments,
+    loggedUser
+}) => {
     return (
         <ReportCardStyled>
             <TopDiv>
@@ -14,8 +23,8 @@ const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id,
                 </div>
             </TopDiv>
             <LinkToReport to={`/report/${_id}`}>
-                <Paragraph>{description}</Paragraph>
-                <ReportImage src={image} alt="report" />
+                <Paragraph>{reportDescription}</Paragraph>
+                <ReportImage src={reportImage} alt="report" />
             </LinkToReport>
             {(comments.length !== 0) && (
                 <div>

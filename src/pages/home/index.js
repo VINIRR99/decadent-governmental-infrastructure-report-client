@@ -8,7 +8,14 @@ const Home = ({ loggedUser }) => {
     return (
         <div style={{padding: "1.53965vw 15.39646vw 0"}}>
             {reports.map(report => (
-                <ReportCard key={report._id} limitComments={3} loggedUser={loggedUser} { ...report } />
+                <ReportCard
+                    key={report._id}
+                    limitComments={3}
+                    reportDescription={report.description}
+                    reportImage={report.image}
+                    loggedUser={loggedUser}
+                    { ...report }
+                />
             ))}
         </div>
     );

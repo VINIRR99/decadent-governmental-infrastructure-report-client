@@ -1,9 +1,10 @@
 import { MainDiv, File, MissImg, Input, Textarea, Button, Form, SubmitButton } from "./styles";
 
 const AddReport = ({
+    marginBotton,
+    functionality,
     showForm,
     setShowForm,
-    handleSubmit,
     setImageFile,
     location,
     setLocation,
@@ -11,11 +12,12 @@ const AddReport = ({
     setDescription,
     handleCancelButton,
     missingImageFile,
-    missingLocation
+    missingLocation,
+    handleSubmit
 }) => {
     return (
-        <MainDiv>
-            {!showForm && <Button onClick={() => setShowForm(true)}>Add new report</Button>}
+        <MainDiv marginBotton={marginBotton}>
+            {!showForm && <Button onClick={() => setShowForm(true)}>{functionality}</Button>}
             {showForm && (
                 <Form onSubmit={handleSubmit}>
                     {missingImageFile && <MissImg>*Image is required!</MissImg>}

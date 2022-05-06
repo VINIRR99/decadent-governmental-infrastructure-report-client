@@ -100,10 +100,16 @@ class ReportsApi {
             return data;
         } catch (error) {console.error(`Error on postComment => ${error.message}`, error.response.data)};
     };
+    updatedComment = async (commentId, comment) => {
+        try {
+            const { data } = this.reportsApi.put(`/comment/${commentId}`, { comment });
+            return data;
+        } catch (error) {console.error(`Error on updatedComment => ${error.message}`, error.response.data)};
+    };
     deleteComment = async commentId => {
         try {
             await this.reportsApi.delete(`/comment/${commentId}`);
-        } catch (error) {console.error(`Error on updateReport => ${error.message}`, error.response.data)};
+        } catch (error) {console.error(`Error on deleteComment => ${error.message}`, error.response.data)};
     };
 };
 

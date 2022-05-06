@@ -2,11 +2,12 @@ import { useState } from "react";
 import reportsApi from "../../utils/reportsApi";
 import { Div, EditButton, EditList, Buttons } from "./styles";
 
-const EditiComment = ({ commentId, comments, setComments, setEmptyComments }) => {
+const EditiComment = ({ commentId, comments, setComments, setEmptyComments, setEditComment }) => {
     const [showOptions, setShowOptions] = useState(false);
 
     const editComment = () => {
         setShowOptions(false);
+        setEditComment(true);
     };
 
     const deleteComment = async () => {

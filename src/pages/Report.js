@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import reportsApi from "../utils/reportsApi";
 import ReportForm from "../components/report-form";
-import DeleteReport from "../components/DeleteReport";
+import DeleteReport from "../components/delete-report";
 import ReportCard from "../components/report-card";
 
 const Div = styled.div`
@@ -74,8 +74,8 @@ const Report = ({ loggedUser }) => {
 
     return (Object.keys(report).length > 0) && (
         <Div>
-            <Buttons>
-                {(loggedUser && (loggedUser._id === report.user._id)) && (
+            {(loggedUser && (loggedUser._id === report.user._id)) && (
+                <Buttons>
                     <ReportForm 
                         functionality="Update report"
                         showForm={showForm}
@@ -90,9 +90,9 @@ const Report = ({ loggedUser }) => {
                         missingLocation={false}
                         handleSubmit={handleSubmit}
                     />
-                )}
-                {(loggedUser && (loggedUser._id === report.user._id)) && <DeleteReport />}
-            </Buttons>
+                    <DeleteReport />
+                </Buttons>
+            )}
             <ReportCard
                 key={report._id}
                 reportImage={imageURL}

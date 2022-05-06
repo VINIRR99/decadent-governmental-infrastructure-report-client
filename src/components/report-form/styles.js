@@ -67,6 +67,7 @@ export const Textarea = styled.textarea`
 `;
 
 export const Button = styled.button`
+    height: fit-content;
     padding: 10px;
     border-radius: 8px;
     cursor: pointer;

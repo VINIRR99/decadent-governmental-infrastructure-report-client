@@ -111,6 +111,12 @@ class ReportsApi {
             await this.reportsApi.delete(`/comment/${commentId}`);
         } catch (error) {console.error(`Error on deleteComment => ${error.message}`, error.response.data)};
     };
+    updateUser = async inputs => {
+        try {
+            const { data } = await this.reportsApi.put("/user", inputs);
+            return data;
+        } catch (error) {console.error(`Error on updateUser => ${error.message}`, error.response.data)};
+    };
 };
 
 export default new ReportsApi();

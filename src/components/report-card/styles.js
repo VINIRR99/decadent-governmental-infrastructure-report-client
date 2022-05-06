@@ -43,3 +43,10 @@ export const ShowCommentsButton = styled(Link)`
     font-weight: bold;
     font-size: 1.5rem;
 `;
+
+export const ReadLaterButton = styled.button`
+    margin-left: 10px;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+`;

@@ -1,8 +1,9 @@
 import { Nav, TopRight, StyledNavLink } from "./styles";
 import { HomeIcon } from "../Icons";
 import Search from "../search";
+import DropdownButton from "../dropdown-button";
 
-const Navbar = () => {
+const Navbar = ({ loggedUser }) => {
     return <>
         <Nav>
             <StyledNavLink to="/">
@@ -10,8 +11,11 @@ const Navbar = () => {
             </StyledNavLink>
             <TopRight>
                 <Search />
-                <StyledNavLink to="/login">Login</StyledNavLink>
-                <StyledNavLink to="/signup">Signup</StyledNavLink>
+                {!loggedUser && <>
+                    <StyledNavLink to="/login">Login</StyledNavLink>
+                    <StyledNavLink to="/signup">Signup</StyledNavLink>
+                </>}
+                {loggedUser && <DropdownButton {...loggedUser} />}
             </TopRight>
         </Nav>
         <div style={{ height: "48.45px" }}></div>

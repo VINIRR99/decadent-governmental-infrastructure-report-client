@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {(async () => setLoggedUser(await JSON.parse(localStorage.getItem("user"))))()}, []);
 
   return <>
-    <Navbar />
+    <Navbar loggedUser={loggedUser} />
     <Routes>
       <Route path="/" element={ <Home loggedUser={loggedUser} /> } />
       <Route path="/report/:reportId" element={ <Report loggedUser={loggedUser} /> } />

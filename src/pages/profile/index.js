@@ -6,7 +6,6 @@ import ProfileImage from "../../components/ProfileImage";
 import AddReport from "../../components/add-report";
 import ReportCard from "../../components/report-card";
 import UserComment from "../../components/user-comment";
-import EditComment from "../../components/edit-comment";
 
 const Profile = ({ loggedUser }) => {
     const { username } = useParams();

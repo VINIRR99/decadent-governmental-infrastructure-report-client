@@ -23,6 +23,6 @@ export const StyledNavLink = styled(NavLink)`
     text-decoration: none;
     margin: 0 12px;
     &:hover {
-        color: #0d259b
+        color: #0d259b;
     }
 `;

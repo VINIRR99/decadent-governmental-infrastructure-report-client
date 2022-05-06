@@ -13,6 +13,11 @@ export const ReportCardStyled = styled.section`
     padding: 10px;
 `;
 
+export const LinkToReport = styled(Link)`
+    text-decoration: none;
+    color: black;
+`;
+
 export const ReportImage = styled.img`
     width: 100%;
     height: calc(66.5127vw / 2);

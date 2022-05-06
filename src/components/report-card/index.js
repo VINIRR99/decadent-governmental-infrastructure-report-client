@@ -40,7 +40,13 @@ const ReportCard = ({
                     <div>
                         <Paragraph>Comments:</Paragraph>
                         {comments.slice(0, limitComments).map(comment => (
-                            <Comment key={comment._id} loggedUser={loggedUser} { ...comment } />
+                            <Comment
+                                key={comment._id}
+                                loggedUser={loggedUser}
+                                comments={comments}
+                                setComments={setComments}
+                                { ...comment }
+                            />
                         ))}
                     </div>
                     {(limitComments && (comments.length > limitComments)) && (

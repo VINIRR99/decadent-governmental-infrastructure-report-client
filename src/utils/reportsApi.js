@@ -83,6 +83,11 @@ class ReportsApi {
             return data;
         } catch (error) {console.error(`Error on updateReport => ${error.message}`, error.response.data)};
     };
+    deleteReport = async reportId => {
+        try {
+            await this.reportsApi.delete(`/reports/${reportId}`);
+        } catch (error) {console.error(`Error on updateReport => ${error.message}`, error.response.data)};
+    };
 };
 
 export default new ReportsApi();

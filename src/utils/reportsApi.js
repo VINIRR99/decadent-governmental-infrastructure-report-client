@@ -88,6 +88,12 @@ class ReportsApi {
             await this.reportsApi.delete(`/reports/${reportId}`);
         } catch (error) {console.error(`Error on updateReport => ${error.message}`, error.response.data)};
     };
+    postComment = async (reportId, comment) => {
+        try {
+            const { data } = await this.reportsApi.post(`/comment/${reportId}`, { comment });
+            return data;
+        } catch (error) {console.error(`Error on updateReport => ${error.message}`, error.response.data)};
+    };
 };
 
 export default new ReportsApi();

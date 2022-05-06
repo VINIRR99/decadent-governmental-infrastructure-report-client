@@ -9,7 +9,7 @@ const ReportCard = ({ user, createdAt, description, fixed, image, comments, _id,
             <TopDiv>
                 <ProfileCard user={user} createdAt={createdAt} />
                 <div>
-                    {fixed ? <Fixed status="solved" loggedUser={loggedUser} reportUserId={user._id} /> : <Fixed status="unsolved" loggedUser={loggedUser} reportUserId={user._id} />}
+                    <Fixed fixedReport={fixed} loggedUser={loggedUser} reportUserId={user._id} reportId={_id} />
                 </div>
             </TopDiv>
             <Paragraph>{description}</Paragraph>

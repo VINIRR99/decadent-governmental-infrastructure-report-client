@@ -7,7 +7,9 @@ const Home = ({ loggedUser }) => {
     useEffect(() => {(async () => setReports(await reportsApi.getAllReports()))()}, []);
     return (
         <div style={{padding: "1.53965vw 15.39646vw 0"}}>
-            {reports.map(report => <ReportCard key={report._id} limitComments={3} loggedUser={loggedUser} { ...report } />)}
+            {reports.map(report => (
+                <ReportCard key={report._id} limitComments={3} loggedUser={loggedUser} { ...report } />
+            ))}
         </div>
     );
 };

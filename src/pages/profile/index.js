@@ -76,10 +76,10 @@ const Profile = ({ loggedUser }) => {
                 )}
                 <div style={{padding: "1.5% 8% 0"}}>
                     {showReadingList && user.readLater.map(report => (
-                        <ReportCard key={report._id} limitComments={3} {...report} />
+                        <ReportCard key={report._id} limitComments={3} {...report} loggedUser={loggedUser} />
                     ))}
                     {showReports && userReports.map(report => (
-                        <ReportCard key={report._id} user={user} limitComments={3} {...report} />
+                        <ReportCard key={report._id} user={user} limitComments={3} {...report} loggedUser={loggedUser} />
                     ))}
                     {showComments && user.comments.map(comment => (
                         <StyledLink key={comment._id} to={`/report/${comment.report._id}`}>

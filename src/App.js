@@ -18,7 +18,7 @@ const App = () => {
     <Navbar />
     <Routes>
       <Route path="/" element={ <Home loggedUser={loggedUser} /> } />
-      <Route path="/report/:reportId" element={ <Report /> } />
+      <Route path="/report/:reportId" element={ <Report loggedUser={loggedUser} /> } />
       <Route path="/search/:search" element={ <SearchResults /> } />
       <Route path="/login" element={ <Login /> } />
       <Route path="/signup" element={ <Signup /> } />

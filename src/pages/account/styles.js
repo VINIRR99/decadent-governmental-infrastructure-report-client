@@ -1,13 +1,11 @@
 import styled from "styled-components";
 
 export const Div = styled.div`
-    background-color: red;
     display: flex;
     justify-content: center;
 `;
 
 export const Content = styled.div`
-    background-color: blue;
     width: fit-content;
     display: flex;
     flex-direction: column;
@@ -55,4 +53,21 @@ export const File = styled.input`
     &:active::before {
         background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9); 
     };
+`;
+
+export const AccountInfo = styled.div`
+    border: 1px solid black;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    div {
+        display: flex;
+    }
+    button {
+        margin-left: 10px;
+        background-color: #24252A;
+        color: white;
+    }
+    p {
+        margin: 0;
+    }
 `;

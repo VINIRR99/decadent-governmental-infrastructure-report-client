@@ -117,6 +117,15 @@ class ReportsApi {
             return data;
         } catch (error) {console.error(`Error on updateUser => ${error.message}`, error.response.data)};
     };
+    uploadProfileImage = async file => {
+        try {
+            const imgData = new FormData();
+            imgData.append("image", file);
+
+            const { data } = await this.reportsApi.put("/user/upload-image", imgData);
+            return data;
+        } catch (error) {console.error(`Error on uploadProfileImage => ${error.message}`, error.response.data)};
+    };
 };
 
 export default new ReportsApi();

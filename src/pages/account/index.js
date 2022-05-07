@@ -1,6 +1,10 @@
-const Account = () => {
+import ProfileImage from "../../components/ProfileImage";
+
+const Account = ({ loggedUser, setLoggedUser }) => {
     return (
-        <h1>Account</h1>
+        <div>
+            <ProfileImage image={loggedUser.profileImage} size={60} margin="0" />
+        </div>
     );
 };
 

@@ -21,19 +21,19 @@ class ReportsApi {
         try {
             const { data } = await this.reportsApi.get("/reports");
             return data;
-        } catch (error) {console.error(`Error on getAllReports => ${error.message}`)};
+        } catch (error) {console.error(`Error on getAllReports => ${error.message}`, error.response.data)};
     };
     getOneReport = async reportId => {
         try {
             const { data } = await this.reportsApi.get(`/reports/${reportId}`);
             return data;
-        } catch (error) {console.error(`Error on getOneReport => ${error.message}`)};
+        } catch (error) {console.error(`Error on getOneReport => ${error.message}`, error.response.data)};
     };
     getSearchResults = async search => {
         try {
             const { data } = await this.reportsApi.get(`/reports/search/${search}`);
             return data;
-        } catch (error) {console.error(`Error on getSearchResults => ${error.message}`)};
+        } catch (error) {console.error(`Error on getSearchResults => ${error.message}`, error.response.data)};
     };
     signup = async (name, username, password, passwordConfirmation) => {
         try {
@@ -47,16 +47,18 @@ class ReportsApi {
             localStorage.setItem("user", JSON.stringify(data.user));
             return data.user;
         } catch (error) {
-            const errorMessage = `Error on signup => ${error.message}`;
-            console.error(errorMessage);
-            return errorMessage;
+            console.error(`Error on signup => ${error.message}`, error.response.data);
+            return `Error on signup => 
+            status: ${error.status}
+            message: ${error.response.data.message}
+            error: ${error.response.data.error}`;
         };
     };
     getUserByUsername = async username => {
         try {
             const { data } = await this.reportsApi.get(`/user/${username}`);
             return data;
-        } catch (error) {console.error(`Error on getUserByUsername => ${error.message}`)};
+        } catch (error) {console.error(`Error on getUserByUsername => ${error.message}`, error.response.data)};
     };
     login = async (username, password) => {
         try {
@@ -64,13 +66,56 @@ class ReportsApi {
             localStorage.setItem("token", data.token);
             localStorage.setItem("user", JSON.stringify(data.user));
             return data.user;
-        } catch (error) {console.error(`Error on login => ${error.message}`)};
+        } catch (error) {console.error(`Error on login => ${error.message}`, error.response.data)};
     };
     postReport = async newReport => {
         try {
             const { data } = await this.reportsApi.post("/reports", newReport);
             return data;
-        } catch (error) {console.error(`Error on postReport => ${error.message}`)};
+        } catch (error) {console.error(`Error on postReport => ${error.message}`, error.response.data)};
+    };
+    uploadReportImage = async (file, reportId) => {
+        try {
+            const imgData = new FormData();
+            imgData.append("image", file);
+
+            const { data } = await this.reportsApi.put(`/reports/upload-image/${reportId}`, imgData);
+            return data;
+        } catch (error) {console.error(`Error on uploadReportImage => ${error.message}`, error.response.data)};
+    };
+    updateReport = async (reportId, inputs) => {
+        try {
+            const { data } = await this.reportsApi.put(`reports/${reportId}`, inputs);
+            return data;
+        } catch (error) {console.error(`Error on updateReport => ${error.message}`, error.response.data)};
+    };
+    deleteReport = async reportId => {
+        try {
+            await this.reportsApi.delete(`/reports/${reportId}`);
+        } catch (error) {console.error(`Error on deleteReport => ${error.message}`, error.response.data)};
+    };
+    postComment = async (reportId, comment) => {
+        try {
+            const { data } = await this.reportsApi.post(`/comment/${reportId}`, { comment });
+            return data;
+        } catch (error) {console.error(`Error on postComment => ${error.message}`, error.response.data)};
+    };
+    updateComment = async (commentId, comment) => {
+        try {
+            const { data } = this.reportsApi.put(`/comment/${commentId}`, { comment });
+            return data;
+        } catch (error) {console.error(`Error on updatedComment => ${error.message}`, error.response.data)};
+    };
+    deleteComment = async commentId => {
+        try {
+            await this.reportsApi.delete(`/comment/${commentId}`);
+        } catch (error) {console.error(`Error on deleteComment => ${error.message}`, error.response.data)};
+    };
+    updateUser = async inputs => {
+        try {
+            const { data } = await this.reportsApi.put("/user", inputs);
+            return data;
+        } catch (error) {console.error(`Error on updateUser => ${error.message}`, error.response.data)};
     };
 };
 

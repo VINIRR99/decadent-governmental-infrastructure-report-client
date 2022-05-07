@@ -13,6 +13,11 @@ export const ReportCardStyled = styled.section`
     padding: 10px;
 `;
 
+export const LinkToReport = styled(Link)`
+    text-decoration: none;
+    color: black;
+`;
+
 export const ReportImage = styled.img`
     width: 100%;
     height: calc(66.5127vw / 2);
@@ -37,4 +42,11 @@ export const ShowCommentsButton = styled(Link)`
     color: white;
     font-weight: bold;
     font-size: 1.5rem;
+`;
+
+export const ReadLaterButton = styled.button`
+    margin-left: 10px;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
 `;

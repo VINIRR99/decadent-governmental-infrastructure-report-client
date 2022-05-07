@@ -1,34 +1,32 @@
 import styled from "styled-components";
 
-export const SearchBar = styled.span`
-    margin-right: 10px;
-    width: 100%;
-    position: relative;
+export const Form = styled.form`
     display: flex;
+    align-items: center;
 `;
 
 export const Input = styled.input`
     width: 100%;
     border: 3px solid #00B4CC;
-    border-left: none;
+    border-right: none;
     padding: 5px;
     height: 20px;
-    border-radius: 0 5px 5px 0;
+    border-radius: 17px 0 0 17px;
     outline: none;
     color: #9DBFAF;
     &:focus {
-        color: #00B4CC;
+        color: black;
     }
 `;
 
-export const SearchButton = styled.button`
-    width: 40px;
+export const Button = styled.button`
+    width: fit-content;
     height: 36px;
     border: 1px solid #00B4CC;
     background: #00B4CC;
     text-align: center;
     color: #fff;
-    border-radius: 5px 0 0 5px;
+    border-radius: 0 17px 17px 0;
     cursor: pointer;
     font-size: 20px;
 `;

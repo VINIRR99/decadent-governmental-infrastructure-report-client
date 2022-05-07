@@ -1,7 +1,11 @@
+import { useState } from "react";
+import reportsApi from "../utils/reportsApi"
 import styled from "styled-components";
 import { ThumbDownIcon, ThumbUpIcon } from "./Icons";
 
 const StyledFixed = styled.span`
+    cursor: ${({ cursor }) => cursor};
+    color: ${({ color }) => color};
     font-size: 1.5rem;
     text-align: center;
     > * {
@@ -9,29 +13,25 @@ const StyledFixed = styled.span`
     }
 `;
 
-const Fixed = ({ status }) => {
-    let color = ""
-    let message = "";
-    let Icon;
-    switch (status) {
-        case "unsolved":
-            message = "Problem stil unsolved!";
-            color = "red";
-            Icon = ThumbDownIcon;
-            break;
-        case "solved":
-            message = "Problem solved";
-            color = "blue";
-            Icon = ThumbUpIcon;
-            break;
-        default:
-            message = "Error: wrong status!";
-            color = "red";
-            Icon = ThumbDownIcon;
+const Fixed = ({ fixedReport, loggedUser, reportUserId, reportId }) => {
+    const [solved, setSolved] = useState(fixedReport);
+
+    const color = solved ? "blue" : "red";
+    const message = solved ? "Problem solved" : "Problem stil unsolved!";
+    const Icon = solved ? ThumbUpIcon : ThumbDownIcon;
+
+    const cursor = (loggedUser && (loggedUser._id === reportUserId)) ? "pointer" : "";
+
+    const handleClick = async () => {
+        if (loggedUser && (loggedUser._id === reportUserId)) {
+            const boolean = solved;
+            setSolved(!boolean);
+            await reportsApi.updateReport(reportId, { fixed: !boolean });
+        };
     };
     
     return (
-        <StyledFixed style={{ color }}>
+        <StyledFixed color={color} cursor={cursor} onClick={handleClick}>
             <Icon />
             {message}
         </StyledFixed>

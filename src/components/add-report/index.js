@@ -1,75 +1,56 @@
 import { useState } from "react";
 import reportsApi from "../../utils/reportsApi";
-import { MainDiv, Input, Textarea, Button, Form, SubmitButton } from "./styles";
+import ReportForm from "../report-form";
 
-const AddReport = ({ userReports, setDataToShow }) => {
+const AddReport = ({ userReports, setUserReports }) => {
     const [showForm, setShowForm] = useState(false);
-    const [imageURL, setImageURL] = useState("");
+    const [imageFile, setImageFile] = useState();
     const [location, setLocation] = useState("");
     const [description, setDescription] = useState("");
-    const [missingImageURL, setMissingImageURL] = useState(false);
+    const [missingImageFile, setMissingImageFile] = useState(false);
     const [missingLocation, setMissingLocation] = useState(false);
 
     const handleCancelButton = () => {
         setShowForm(false);
-        setImageURL("");
+        setImageFile();
         setLocation("");
         setDescription("");
-        setMissingImageURL(false);
+        setMissingImageFile(false);
         setMissingLocation(false);
     };
 
     const handleSubmit = async event => {
         event.preventDefault();
 
-        setMissingImageURL(!imageURL ? true : false);
+        setMissingImageFile(!imageFile ? true : false);
         setMissingLocation(!location ? true : false);
 
-        if (imageURL && location) {
-            const reportInputs = { location, image: imageURL };
+        if (imageFile && location) {
+            const reportInputs = { location };
             if (description) reportInputs.description = description;
-            const newReport = await reportsApi.postReport(reportInputs);
-            const notFixedReports = [...userReports].filter(report => !report.fixed);
-            const fixedReports = [...userReports].filter(report => report.fixed);
-            setDataToShow([...notFixedReports, newReport, ...fixedReports]);
+            const { _id } = await reportsApi.postReport(reportInputs);
+            const newReport = await reportsApi.uploadReportImage(imageFile, _id);
+            setUserReports([newReport, ...userReports]);
 
             handleCancelButton();
         };
     };
 
     return (
-        <MainDiv>
-            {!showForm && <Button onClick={() => setShowForm(true)}>Add new report</Button>}
-            {showForm && (
-                <Form onSubmit={handleSubmit}>
-                    <Input
-                        type="url"
-                        placeholder={missingImageURL ? "*Image URL is required!" : "Report image URL"}
-                        placeholderColor={missingImageURL ? "red" : "gray"}
-                        value={imageURL}
-                        onChange={e => setImageURL(e.target.value)}
-                    />
-                    <Input
-                        type="text"
-                        placeholder={missingLocation ? "*Location is required!" : "Location"}
-                        placeholderColor={missingLocation ? "red" : "gray"}
-                        value={location}
-                        onChange={e => setLocation(e.target.value)}
-                    />
-                    <Textarea
-                        rows="5"
-                        cols="35"
-                        placeholder="description..."
-                        value={description}
-                        onChange={e => setDescription(e.target.value)}
-                    ></Textarea>
-                    <div>
-                        <SubmitButton type="submit">Submit report</SubmitButton>
-                        <Button onClick={handleCancelButton}>Cancel</Button>
-                    </div>
-                </Form>
-            )}
-        </MainDiv>
+        <ReportForm
+            functionality="Add new report"
+            showForm={showForm}
+            setShowForm={setShowForm}
+            setImageFile={setImageFile}
+            location={location}
+            setLocation={setLocation}
+            description={description}
+            setDescription={setDescription}
+            handleCancelButton={handleCancelButton}
+            missingImageFile={missingImageFile}
+            missingLocation={missingLocation}
+            handleSubmit={handleSubmit}
+        />
     );
 };
 

@@ -15,7 +15,7 @@ const DropdownButton = ({ profileImage, username }) => {
 
     const handleAccount = () => {
         setShowDropdown(false);
-        navigate("/");
+        navigate("/private/account");
     };
 
     const handleLogout = () => {

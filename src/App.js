@@ -8,6 +8,8 @@ import SearchResults from "./pages/search-results";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import Profile from "./pages/profile";
+import PrivateOutlet from "./components/PrivateUoutlet";
+import Account from "./pages/account";
 
 const App = () => {
   const [loggedUser, setLoggedUser] = useState();
@@ -23,6 +25,9 @@ const App = () => {
       <Route path="/login" element={ <Login /> } />
       <Route path="/signup" element={ <Signup /> } />
       <Route path="/profile/:username" element={ <Profile loggedUser={loggedUser} setLoggedUser={setLoggedUser} /> } />
+      <Route path="/private" element={ <PrivateOutlet /> }>
+        <Route path="/private/account" element={ <Account /> } />
+      </Route>
     </Routes>
   </>
 };

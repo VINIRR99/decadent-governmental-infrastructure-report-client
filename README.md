@@ -1,5 +1,7 @@
-# Backend repository
-[decadent-governmental-infrastructure-report-api](https://github.com/VINIRR99/decadent-governmental-infrastructure-report-api)
+# Links
+Backend repository: [decadent-governmental-infrastructure-report-api](https://github.com/VINIRR99/decadent-governmental-infrastructure-report-api) \
+Backend deploy: [https://infraestructure-report-api.herokuapp.com](https://infraestructure-report-api.herokuapp.com) \
+Frontend deploy: [https://infraestructure-report-client.herokuapp.com](https://infraestructure-report-client.herokuapp.com)
 
 # Getting Started with Create React App
 

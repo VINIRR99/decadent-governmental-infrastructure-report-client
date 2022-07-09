@@ -15,9 +15,6 @@ import Account from "./pages/account";
 const App = () => {
   const [loggedUser, setLoggedUser] = useState();
 
-  const hello = "Hello";
-  console.log("Hello");
-
   useEffect(() => {(async () => {
     const token = localStorage.getItem("token");
     if (token) {

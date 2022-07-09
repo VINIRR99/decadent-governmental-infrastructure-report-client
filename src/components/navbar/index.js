@@ -12,8 +12,8 @@ const Navbar = ({ loggedUser }) => {
             <TopRight>
                 <Search />
                 {!loggedUser && <>
-                    <StyledNavLink to="/login">Login</StyledNavLink>
-                    <StyledNavLink to="/signup">Signup</StyledNavLink>
+                    <StyledNavLink to="/auth/login">Login</StyledNavLink>
+                    <StyledNavLink to="/auth/signup">Signup</StyledNavLink>
                 </>}
                 {loggedUser && <DropdownButton {...loggedUser} />}
             </TopRight>

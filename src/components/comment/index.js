@@ -47,7 +47,7 @@ const Comment = ({ loggedUser, user, comment: commentText, _id, createdAt, comme
                         />
                     )}
                 </CommentContent>
-                <CreatedAt>{createdAt}</CreatedAt>
+                <CreatedAt>{createdAt.slice(0, 10).split("-").reverse().join("/")}</CreatedAt>
             </RightDiv>
         </StyledComment>
     );

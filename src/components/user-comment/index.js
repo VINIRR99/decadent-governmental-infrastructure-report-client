@@ -24,7 +24,7 @@ const UserComment = ({
                 {!editComment && (
                     <StyledLink to={`/report/${report._id}`}>
                         <Comment>{comment}</Comment>
-                        <CreatedAt>{createdAt}</CreatedAt>
+                        <CreatedAt>{createdAt.slice(0, 10).split("-").reverse().join("/")}</CreatedAt>
                     </StyledLink>
                 )}
                 {editComment && (

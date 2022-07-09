@@ -38,27 +38,9 @@ export const File = styled.input`
     };
 `;
 
-export const MissImg = styled.p`
+export const MissingMsg = styled.p`
     margin: 0;
     color: red;
-`;
-
-export const Input = styled.input`
-    border-radius: 5px;
-    padding: 5px;
-    margin-bottom: 10px;
-    ::placeholder {
-        color: ${({ placeholderColor }) => placeholderColor};
-        opacity: 1;
-    }
-
-    :-ms-input-placeholder {
-        color: ${({ placeholderColor }) => placeholderColor};
-    }
-
-    ::-ms-input-placeholder {
-        color: ${({ placeholderColor }) => placeholderColor};
-    }
 `;
 
 export const Textarea = styled.textarea`

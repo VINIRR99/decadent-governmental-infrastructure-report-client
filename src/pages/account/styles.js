@@ -58,16 +58,27 @@ export const File = styled.input`
 export const AccountInfo = styled.div`
     border: 1px solid black;
     font-size: 1.5rem;
-    margin-top: 10px;
+    margin: 10px 0;
     div {
         display: flex;
-    }
-    button {
-        margin-left: 10px;
-        background-color: #24252A;
-        color: white;
     }
     p {
         margin: 0;
     }
+`;
+
+export const AccInfoButton = styled.button`
+    margin-left: 10px;
+    background-color: #24252A;
+    color: white;
+`;
+
+export const DeleteDiv = styled.div`
+    justify-content: center;
+    margin: 10px 0;
+`;
+
+export const DeleteButton = styled(AccInfoButton)`
+    background-color: #e54e27;
+    border-color: #dd7358;
 `;

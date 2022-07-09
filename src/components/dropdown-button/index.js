@@ -15,14 +15,13 @@ const DropdownButton = ({ profileImage, username }) => {
 
     const handleAccount = () => {
         setShowDropdown(false);
-        navigate("/private/account");
+        navigate("/account");
     };
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        navigate("/");
-        window.location.reload();
+        window.location = "/";
     };
 
     return (

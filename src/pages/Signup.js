@@ -1,11 +1,8 @@
 import { useState } from "react";
 import reportsApi from "../utils/reportsApi";
-import { useNavigate } from "react-router-dom";
 import Form from "../components/form";
 
 const Signup = () => {
-    const navigate = useNavigate();
-
     const [name, setName] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -66,7 +63,7 @@ const Signup = () => {
 
         if (username) {
             const verifyUsername = await reportsApi.getUserByUsername(username);
-            if (verifyUsername === 404) {
+            if (verifyUsername.status && (verifyUsername.status === 404)) {
                 setUsedUsername(false);
                 if (
                     /^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/.test(name) &&
@@ -80,8 +77,7 @@ const Signup = () => {
                         setUsername("");
                         setPassword("");
                         setPasswordConfirmation("");
-                        navigate(`/profile/${newUser.username}`);
-                        window.location.reload();
+                        window.location = `/profile/${newUser.username}`
                     } else alert(newUser);
                 };
             } else setUsedUsername(true);

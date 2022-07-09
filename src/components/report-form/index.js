@@ -1,4 +1,4 @@
-import { MainDiv, File, MissImg, Input, Textarea, Button, Form, SubmitButton } from "./styles";
+import { MainDiv, File, MissingMsg, Textarea, Button, Form, SubmitButton } from "./styles";
 
 const ReportForm = ({
     functionality,
@@ -11,7 +11,7 @@ const ReportForm = ({
     setDescription,
     handleCancelButton,
     missingImageFile,
-    missingLocation,
+    missingDescription,
     handleSubmit
 }) => {
     return (
@@ -19,15 +19,9 @@ const ReportForm = ({
             {!showForm && <Button onClick={() => setShowForm(true)}>{functionality}</Button>}
             {showForm && (
                 <Form onSubmit={handleSubmit}>
-                    {missingImageFile && <MissImg>*Image is required!</MissImg>}
+                    {missingImageFile && <MissingMsg>*Image is required!</MissingMsg>}
                     <File type="file" onChange={e => setImageFile(e.target.files[0])} accept="image/*" />
-                    <Input
-                        type="text"
-                        placeholder={missingLocation ? "*Location is required!" : "Location"}
-                        placeholderColor={missingLocation ? "red" : "gray"}
-                        value={location}
-                        onChange={e => setLocation(e.target.value)}
-                    />
+                    {missingDescription && <MissingMsg>*Description is required!</MissingMsg>}
                     <Textarea
                         rows="5"
                         cols="35"

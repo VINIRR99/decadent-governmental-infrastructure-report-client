@@ -48,7 +48,7 @@ const Report = ({ loggedUser, setLoggedUser }) => {
         if (imageFile || descriptionForm) {
             if (descriptionForm) {
                 setDescription(descriptionForm);
-                await reportsApi.updateReport(report._id, { description });
+                await reportsApi.updateReport(report._id, { description: descriptionForm });
             };
 
             if (imageFile) {

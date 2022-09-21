@@ -17,6 +17,7 @@ Backend deploy: [https://infraestructure-report-api.herokuapp.com](https://infra
 - JavaScript
 - Node.js
 - React.js
+- styled-components
 - Axios
 
 ## Getting Started with Create React App

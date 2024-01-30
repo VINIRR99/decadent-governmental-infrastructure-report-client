@@ -6,9 +6,7 @@ My third and final project of the Ironhack Web Development bootcamp was an full-
 In this repository is stored the frontend of the project.
 
 ## Links
-Frontend deploy: [https://infraestructure-report-client.herokuapp.com](https://infraestructure-report-client.herokuapp.com) \
-Backend repository: [decadent-governmental-infrastructure-report-api](https://github.com/VINIRR99/decadent-governmental-infrastructure-report-api) \
-Backend deploy: [https://infraestructure-report-api.herokuapp.com](https://infraestructure-report-api.herokuapp.com)
+Backend repository: [decadent-governmental-infrastructure-report-api](https://github.com/VINIRR99/decadent-governmental-infrastructure-report-api)
 
 ## Technologies
 
